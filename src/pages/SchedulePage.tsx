@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from '@/components/common/ModulePlaceholder'
+import { ShiftsView } from '@/features/shifts'
 
 export default function SchedulePage() {
-  return <ModulePlaceholder page="schedule" icon="calendar" />
+  return <ShiftsView />
 }

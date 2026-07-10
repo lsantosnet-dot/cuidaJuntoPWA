@@ -33,6 +33,25 @@
     "signOut": "Sair",
     "demo": "Demo"
   },
+  "dashboard": {
+    "caringFor": "Cuidando de",
+    "onDuty": "Em plantão",
+    "medsToday": "Remédios de hoje",
+    "nextDose": "Próxima dose",
+    "seeAll": "Ver tudo",
+    "allDosesDone": "Todas as doses de hoje foram administradas. 🎉",
+    "latestDiary": "Último registro",
+    "noDiary": "Ainda não há registros no diário hoje."
+  },
+  "onboarding": {
+    "title": "Bem-vindo(a) ao CuidaJunto",
+    "subtitle": "Vamos criar o círculo de cuidado do seu familiar.",
+    "recipientLabel": "Quem você cuida?",
+    "recipientHint": "Nome da pessoa cuidada. Você poderá completar o perfil depois.",
+    "recipientPlaceholder": "ex.: Sr. Antenor",
+    "circleName": "Cuidado de {{name}}",
+    "create": "Criar círculo de cuidado"
+  },
   "demo": {
     "title": "Modo demonstração.",
     "message": "O login ainda não foi configurado, então os dados não são salvos."
@@ -46,7 +65,126 @@
   "common": {
     "comingSoon": "Em breve",
     "underConstruction": "Este módulo será construído nas próximas fases.",
-    "loading": "Carregando…"
+    "loading": "Carregando…",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "add": "Adicionar",
+    "edit": "Editar",
+    "remove": "Remover",
+    "error": "Algo deu errado",
+    "saving": "Salvando…",
+    "optional": "opcional"
+  },
+  "medications": {
+    "add": "Adicionar",
+    "remaining_one": "{{count}} dose pendente",
+    "remaining_other": "{{count}} doses pendentes",
+    "markTaken": "Marcar",
+    "undo": "Desfazer",
+    "takenBy": "Tomado por {{name}} às {{time}}",
+    "addTitle": "Novo medicamento",
+    "fieldName": "Nome do medicamento",
+    "fieldDosage": "Dosagem",
+    "dosagePlaceholder": "ex.: 850 mg",
+    "fieldTimes": "Horários",
+    "timesHint": "Separe por vírgula. Ex.: 08:00, 20:00",
+    "fieldInstructions": "Instruções",
+    "emptyTitle": "Nenhum remédio cadastrado",
+    "emptyDescription": "Adicione os medicamentos e horários para acompanhar as doses do dia."
+  },
+  "diary": {
+    "add": "Novo registro",
+    "addTitle": "Novo registro no diário",
+    "fieldContent": "Como foi?",
+    "sleepLabel": "Sono",
+    "appetiteLabel": "Apetite",
+    "emptyTitle": "Diário vazio",
+    "emptyDescription": "Registre como o dia está transcorrendo para toda a equipe acompanhar.",
+    "mood": {
+      "label": "Humor",
+      "great": "Ótimo",
+      "ok": "Neutro",
+      "down": "Para baixo",
+      "irritated": "Irritado",
+      "sleepy": "Sonolento"
+    },
+    "sleep": {
+      "good": "Bom",
+      "restless": "Agitado",
+      "interrupted": "Interrompido"
+    },
+    "appetite": {
+      "low": "Pouco",
+      "normal": "Normal",
+      "high": "Muito"
+    }
+  },
+  "shifts": {
+    "add": "Agendar plantão",
+    "addTitle": "Agendar plantão",
+    "onDuty": "Em plantão agora",
+    "nobody": "Ninguém em plantão",
+    "assume": "Assumir plantão",
+    "takeOver": "Assumir",
+    "end": "Encerrar",
+    "fieldCaregiver": "Cuidador(a)",
+    "fieldStart": "Início",
+    "fieldEnd": "Término",
+    "emptyTitle": "Sem plantões",
+    "emptyDescription": "Assuma o plantão atual ou agende os próximos turnos da equipe.",
+    "status": {
+      "active": "Em plantão",
+      "scheduled": "Agendado",
+      "ended": "Encerrado"
+    }
+  },
+  "team": {
+    "invite": "Convidar",
+    "inviteTitle": "Convidar para a equipe",
+    "inviteHint": "A pessoa entra na equipe ao aceitar o convite por e-mail.",
+    "sendInvite": "Enviar convite",
+    "fieldEmail": "E-mail",
+    "fieldRole": "Papel",
+    "membersSection_one": "{{count}} membro",
+    "membersSection_other": "{{count}} membros",
+    "invitesSection": "Convites pendentes",
+    "pending": "Pendente",
+    "revoke": "Cancelar",
+    "role": {
+      "admin": "Administrador",
+      "family": "Familiar",
+      "caregiver": "Cuidador(a)"
+    }
+  },
+  "history": {
+    "add": "Adicionar",
+    "addTitle": "Novo registro médico",
+    "fieldTitle": "Título",
+    "fieldCategory": "Categoria",
+    "fieldDate": "Data",
+    "fieldDetails": "Detalhes",
+    "emptyTitle": "Histórico vazio",
+    "emptyDescription": "Registre exames, consultas e documentos para manter tudo em um só lugar.",
+    "category": {
+      "exam": "Exame",
+      "appointment": "Consulta",
+      "document": "Documento",
+      "note": "Nota"
+    }
+  },
+  "profile": {
+    "editTitle": "Editar perfil",
+    "fieldName": "Nome",
+    "fieldConditions": "Condições de saúde",
+    "conditionsHint": "Separe por vírgula. Ex.: Diabetes, Hipertensão",
+    "fieldBirthDate": "Data de nascimento",
+    "fieldNotes": "Observações",
+    "conditions": "Condições",
+    "notes": "Observações",
+    "age_one": "{{count}} ano",
+    "age_other": "{{count}} anos",
+    "emptyTitle": "Perfil ainda não preenchido",
+    "emptyDescription": "Adicione os dados do idoso para a equipe ter tudo à mão."
   },
   "pages": {
     "home": {

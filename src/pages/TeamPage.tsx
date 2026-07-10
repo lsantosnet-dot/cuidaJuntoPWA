@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from '@/components/common/ModulePlaceholder'
+import { TeamView } from '@/features/team'
 
 export default function TeamPage() {
-  return <ModulePlaceholder page="team" icon="users" />
+  return <TeamView />
 }

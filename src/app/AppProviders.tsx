@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { AuthProvider, RequireAuth } from '@/features/auth'
-import { CareCircleProvider } from '@/features/care-circle'
+import { CareCircleProvider, CareCircleGate } from '@/features/care-circle'
 
 /**
  * Composition root for cross-cutting providers, in dependency order:
@@ -11,7 +11,9 @@ export function AppProviders({ children }: { children: ReactNode }) {
   return (
     <AuthProvider>
       <RequireAuth>
-        <CareCircleProvider>{children}</CareCircleProvider>
+        <CareCircleProvider>
+          <CareCircleGate>{children}</CareCircleGate>
+        </CareCircleProvider>
       </RequireAuth>
     </AuthProvider>
   )

@@ -33,6 +33,25 @@
     "signOut": "Sign out",
     "demo": "Demo"
   },
+  "dashboard": {
+    "caringFor": "Caring for",
+    "onDuty": "On duty",
+    "medsToday": "Today's meds",
+    "nextDose": "Next dose",
+    "seeAll": "See all",
+    "allDosesDone": "All of today's doses have been given. 🎉",
+    "latestDiary": "Latest entry",
+    "noDiary": "No diary entries yet today."
+  },
+  "onboarding": {
+    "title": "Welcome to CuidaJunto",
+    "subtitle": "Let's create your family member's care circle.",
+    "recipientLabel": "Who do you care for?",
+    "recipientHint": "The care recipient's name. You can complete the profile later.",
+    "recipientPlaceholder": "e.g. Mr. Antenor",
+    "circleName": "{{name}}'s care",
+    "create": "Create care circle"
+  },
   "demo": {
     "title": "Demo mode.",
     "message": "Sign-in isn't configured yet, so nothing is saved."
@@ -46,7 +65,126 @@
   "common": {
     "comingSoon": "Coming soon",
     "underConstruction": "This module will be built in the next phases.",
-    "loading": "Loading…"
+    "loading": "Loading…",
+    "save": "Save",
+    "cancel": "Cancel",
+    "add": "Add",
+    "edit": "Edit",
+    "remove": "Remove",
+    "error": "Something went wrong",
+    "saving": "Saving…",
+    "optional": "optional"
+  },
+  "medications": {
+    "add": "Add",
+    "remaining_one": "{{count}} dose pending",
+    "remaining_other": "{{count}} doses pending",
+    "markTaken": "Mark",
+    "undo": "Undo",
+    "takenBy": "Taken by {{name}} at {{time}}",
+    "addTitle": "New medication",
+    "fieldName": "Medication name",
+    "fieldDosage": "Dosage",
+    "dosagePlaceholder": "e.g. 850 mg",
+    "fieldTimes": "Times",
+    "timesHint": "Comma-separated. E.g. 08:00, 20:00",
+    "fieldInstructions": "Instructions",
+    "emptyTitle": "No medications yet",
+    "emptyDescription": "Add medications and times to track today's doses."
+  },
+  "diary": {
+    "add": "New entry",
+    "addTitle": "New diary entry",
+    "fieldContent": "How did it go?",
+    "sleepLabel": "Sleep",
+    "appetiteLabel": "Appetite",
+    "emptyTitle": "Empty diary",
+    "emptyDescription": "Log how the day is going so the whole team stays in the loop.",
+    "mood": {
+      "label": "Mood",
+      "great": "Great",
+      "ok": "Neutral",
+      "down": "Low",
+      "irritated": "Irritated",
+      "sleepy": "Sleepy"
+    },
+    "sleep": {
+      "good": "Good",
+      "restless": "Restless",
+      "interrupted": "Interrupted"
+    },
+    "appetite": {
+      "low": "Low",
+      "normal": "Normal",
+      "high": "High"
+    }
+  },
+  "shifts": {
+    "add": "Schedule shift",
+    "addTitle": "Schedule shift",
+    "onDuty": "On duty now",
+    "nobody": "No one on duty",
+    "assume": "Take shift",
+    "takeOver": "Take over",
+    "end": "End",
+    "fieldCaregiver": "Caregiver",
+    "fieldStart": "Start",
+    "fieldEnd": "End",
+    "emptyTitle": "No shifts",
+    "emptyDescription": "Take the current shift or schedule the team's upcoming turns.",
+    "status": {
+      "active": "On duty",
+      "scheduled": "Scheduled",
+      "ended": "Ended"
+    }
+  },
+  "team": {
+    "invite": "Invite",
+    "inviteTitle": "Invite to the team",
+    "inviteHint": "They join the team when they accept the email invite.",
+    "sendInvite": "Send invite",
+    "fieldEmail": "Email",
+    "fieldRole": "Role",
+    "membersSection_one": "{{count}} member",
+    "membersSection_other": "{{count}} members",
+    "invitesSection": "Pending invites",
+    "pending": "Pending",
+    "revoke": "Revoke",
+    "role": {
+      "admin": "Admin",
+      "family": "Family",
+      "caregiver": "Caregiver"
+    }
+  },
+  "history": {
+    "add": "Add",
+    "addTitle": "New medical record",
+    "fieldTitle": "Title",
+    "fieldCategory": "Category",
+    "fieldDate": "Date",
+    "fieldDetails": "Details",
+    "emptyTitle": "Empty history",
+    "emptyDescription": "Log exams, appointments and documents to keep everything in one place.",
+    "category": {
+      "exam": "Exam",
+      "appointment": "Appointment",
+      "document": "Document",
+      "note": "Note"
+    }
+  },
+  "profile": {
+    "editTitle": "Edit profile",
+    "fieldName": "Name",
+    "fieldConditions": "Health conditions",
+    "conditionsHint": "Comma-separated. E.g. Diabetes, Hypertension",
+    "fieldBirthDate": "Date of birth",
+    "fieldNotes": "Notes",
+    "conditions": "Conditions",
+    "notes": "Notes",
+    "age_one": "{{count}} year old",
+    "age_other": "{{count}} years old",
+    "emptyTitle": "Profile not set up yet",
+    "emptyDescription": "Add the care recipient's details so the team has everything at hand."
   },
   "pages": {
     "home": {

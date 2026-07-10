@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from '@/components/common/ModulePlaceholder'
+import { DiaryView } from '@/features/diary'
 
 export default function DiaryPage() {
-  return <ModulePlaceholder page="diary" icon="book" />
+  return <DiaryView />
 }

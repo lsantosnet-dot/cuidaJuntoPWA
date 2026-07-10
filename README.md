@@ -87,7 +87,7 @@ As chaves de cliente ficam em **Settings → Secrets and variables → Actions**
 
 - [x] **Fase 1 — Scaffold:** Vite + React + TS + Tailwind, PWA instalável, i18n PT/EN, navegação (bottom nav + drawer + SOS), design tokens.
 - [x] **Fase 2 — Auth + dados:** Clerk (com modo demo), cliente Supabase vinculado ao token, schema + RLS por círculo de cuidado, provider do círculo ativo.
-- [ ] **Fase 3 — Módulos:** onboarding/círculo, dashboard, remédios, diário, escala, equipe, histórico, perfil.
+- [x] **Fase 3 — Módulos:** onboarding/círculo, dashboard, remédios, diário, escala, equipe, histórico, perfil — ligados ao Supabase, com dados de exemplo em modo demo.
 - [ ] **Fase 4 — Notificações:** push (lembrete de remédio via pg_cron + SOS imediato).
 - [ ] **Fase 5 — Deploy:** ajustes finais de CI/CD e documentação.
 

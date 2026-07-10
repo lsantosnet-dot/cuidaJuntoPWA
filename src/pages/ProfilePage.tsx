@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from '@/components/common/ModulePlaceholder'
+import { ProfileView } from '@/features/profile'
 
 export default function ProfilePage() {
-  return <ModulePlaceholder page="profile" icon="user" />
+  return <ProfileView />
 }

@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from '@/components/common/ModulePlaceholder'
+import { MedicationsView } from '@/features/medications'
 
 export default function MedicationsPage() {
-  return <ModulePlaceholder page="medications" icon="pill" />
+  return <MedicationsView />
 }

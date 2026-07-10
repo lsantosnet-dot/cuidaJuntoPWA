@@ -58,6 +58,7 @@ export default {
       },
       borderRadius: {
         card: '1rem',
+        input: '0.75rem',
         pill: '9999px',
       },
       minHeight: {

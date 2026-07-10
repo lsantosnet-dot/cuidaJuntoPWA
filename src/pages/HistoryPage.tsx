@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from '@/components/common/ModulePlaceholder'
+import { HistoryView } from '@/features/history'
 
 export default function HistoryPage() {
-  return <ModulePlaceholder page="history" icon="history" />
+  return <HistoryView />
 }
