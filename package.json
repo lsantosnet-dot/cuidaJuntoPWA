@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.14.0",
+    "@clerk/localizations": "^3.37.7",
     "@supabase/supabase-js": "^2.45.4",
     "i18next": "^23.15.1",
     "i18next-browser-languagedetector": "^8.0.0",

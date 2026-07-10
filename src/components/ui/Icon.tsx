@@ -66,6 +66,18 @@ const ICON_PATHS = {
   chevronRight: <path d="M9 5l7 7-7 7" />,
   check: <path d="M4 12.5 9 17.5 20 6.5" />,
   plus: <path d="M12 5v14M5 12h14" />,
+  info: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 11v5M12 7.5h.01" />
+    </>
+  ),
+  logout: (
+    <>
+      <path d="M15 4h3.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H15" />
+      <path d="M10 12h9M16 8.5 19.5 12 16 15.5" />
+    </>
+  ),
 } as const
 
 export type IconName = keyof typeof ICON_PATHS

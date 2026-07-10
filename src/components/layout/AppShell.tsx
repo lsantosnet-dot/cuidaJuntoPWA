@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import { AppHeader } from './AppHeader'
 import { SideDrawer } from './SideDrawer'
 import { BottomNav } from './BottomNav'
+import { DemoModeBanner } from '@/components/common/DemoModeBanner'
 import { useDisclosure } from '@/hooks/useDisclosure'
 
 /**
@@ -16,6 +17,7 @@ export function AppShell() {
     <div className="flex min-h-dvh flex-col bg-surface">
       <AppHeader onOpenMenu={drawer.open} />
       <SideDrawer isOpen={drawer.isOpen} onClose={drawer.close} />
+      <DemoModeBanner />
 
       <main className="mx-auto w-full max-w-app flex-1 px-5 py-6">
         <Outlet />

@@ -29,6 +29,14 @@
     "pt": "Português",
     "en": "English"
   },
+  "account": {
+    "signOut": "Sair",
+    "demo": "Demo"
+  },
+  "demo": {
+    "title": "Modo demonstração.",
+    "message": "O login ainda não foi configurado, então os dados não são salvos."
+  },
   "sos": {
     "title": "Emergência",
     "description": "Isto alertará toda a equipe de cuidado imediatamente.",

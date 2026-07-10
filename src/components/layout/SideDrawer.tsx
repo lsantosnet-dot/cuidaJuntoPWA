@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { CARE_NAV, ACCOUNT_NAV, type NavItem } from '@/config/navigation'
 import { Icon, IconButton } from '@/components/ui'
+import { UserMenu } from '@/features/auth'
 import { LanguageToggle } from './LanguageToggle'
 import { APP_VERSION } from '@/config/appInfo'
 import { cn } from '@/lib/cn'
@@ -81,9 +82,10 @@ export function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
           </div>
         </nav>
 
-        <div className="border-t border-outline-variant p-4">
+        <div className="flex flex-col gap-4 border-t border-outline-variant p-4">
+          <UserMenu />
           <LanguageToggle />
-          <p className="pt-3 text-center text-sm text-content-variant">
+          <p className="text-center text-sm text-content-variant">
             {t('drawer.version', { version: APP_VERSION })}
           </p>
         </div>

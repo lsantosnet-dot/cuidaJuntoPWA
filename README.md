@@ -15,8 +15,8 @@ remédios, diário de cuidados, escala de plantão, histórico médico e alertas
 | Rotas | React Router (HashRouter — compatível com GitHub Pages) |
 | i18n | react-i18next (PT-BR / EN) |
 | PWA | vite-plugin-pwa + service worker próprio (`src/sw.ts`) |
-| Auth | Clerk *(Fase 2)* |
-| Banco | Supabase / Postgres + RLS *(Fase 2)* |
+| Auth | Clerk |
+| Banco | Supabase / Postgres + RLS |
 | Push | Web Push (VAPID) + Supabase Edge Functions *(Fase 4)* |
 | Deploy | GitHub Actions → GitHub Pages |
 
@@ -26,19 +26,34 @@ Organização **por funcionalidade**, com arquivos pequenos e componentes reutil
 
 ```
 src/
-├─ app/            # Router + fallback de carregamento
+├─ app/            # AppProviders (auth → gate → círculo) + Router
 ├─ components/
 │  ├─ ui/          # Primitivos reutilizáveis: Button, Card, Chip, Avatar, Icon, Modal…
 │  ├─ layout/      # AppShell, AppHeader, BottomNav, SideDrawer, SosButton, LanguageToggle
-│  └─ common/      # Blocos compartilhados entre páginas (ModulePlaceholder)
-├─ config/         # navigation.ts (fonte única da navegação)
-├─ hooks/          # useDisclosure, useLanguage…
-├─ lib/            # i18n, rotas, utilitários (cn)
+│  └─ common/      # Blocos compartilhados (ModulePlaceholder, DemoModeBanner)
+├─ features/       # Módulos isolados por funcionalidade
+│  ├─ auth/        # AuthProvider (Clerk ou demo), RequireAuth, UserMenu
+│  └─ care-circle/ # Contexto do círculo de cuidado ativo + API
+├─ config/         # navigation.ts, env.ts, appInfo.ts
+├─ hooks/          # useDisclosure, useLanguage, useSupabaseClient…
+├─ lib/            # i18n, rotas, supabase (client + tipos), utilitários
 ├─ locales/        # pt/*.json · en/*.json (por namespace)
 ├─ pages/          # Composição fina de cada tela (lazy-loaded)
 ├─ styles/         # Tokens de design + base Tailwind
 └─ sw.ts           # Service worker (precache + handlers de push)
+
+supabase/         # Migrações SQL (schema + RLS) e guia de configuração
 ```
+
+### Autenticação e dados
+
+- **Clerk** cuida do login; **Supabase** (Postgres + RLS) guarda os dados.
+- O app envia o token do Clerk ao Supabase (integração third-party auth), e a RLS
+  restringe cada consulta ao **círculo de cuidado** do usuário.
+- **Modo demonstração:** enquanto as chaves não estão configuradas, o app roda
+  navegável e sem persistência (um aviso aparece no topo). Basta definir as chaves
+  para ativar login e banco — sem mudar código.
+- Configuração passo a passo em [`supabase/README.md`](supabase/README.md).
 
 ## Rodando localmente
 
@@ -71,7 +86,7 @@ As chaves de cliente ficam em **Settings → Secrets and variables → Actions**
 ## Roadmap
 
 - [x] **Fase 1 — Scaffold:** Vite + React + TS + Tailwind, PWA instalável, i18n PT/EN, navegação (bottom nav + drawer + SOS), design tokens.
-- [ ] **Fase 2 — Auth + dados:** Clerk, Supabase (schema + RLS), integração JWT.
+- [x] **Fase 2 — Auth + dados:** Clerk (com modo demo), cliente Supabase vinculado ao token, schema + RLS por círculo de cuidado, provider do círculo ativo.
 - [ ] **Fase 3 — Módulos:** onboarding/círculo, dashboard, remédios, diário, escala, equipe, histórico, perfil.
 - [ ] **Fase 4 — Notificações:** push (lembrete de remédio via pg_cron + SOS imediato).
 - [ ] **Fase 5 — Deploy:** ajustes finais de CI/CD e documentação.

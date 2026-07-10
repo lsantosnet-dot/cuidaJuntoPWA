@@ -29,6 +29,14 @@
     "pt": "Português",
     "en": "English"
   },
+  "account": {
+    "signOut": "Sign out",
+    "demo": "Demo"
+  },
+  "demo": {
+    "title": "Demo mode.",
+    "message": "Sign-in isn't configured yet, so nothing is saved."
+  },
   "sos": {
     "title": "Emergency",
     "description": "This will alert your whole care team immediately.",
