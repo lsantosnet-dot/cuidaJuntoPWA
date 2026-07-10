@@ -22,7 +22,8 @@
     "close": "Close menu",
     "language": "Language",
     "sectionCare": "Care",
-    "sectionAccount": "Account"
+    "sectionAccount": "Account",
+    "version": "Version {{version}}"
   },
   "language": {
     "pt": "Português",

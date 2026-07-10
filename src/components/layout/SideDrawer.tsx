@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { CARE_NAV, ACCOUNT_NAV, type NavItem } from '@/config/navigation'
 import { Icon, IconButton } from '@/components/ui'
 import { LanguageToggle } from './LanguageToggle'
+import { APP_VERSION } from '@/config/appInfo'
 import { cn } from '@/lib/cn'
 
 interface SideDrawerProps {
@@ -82,6 +83,9 @@ export function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
 
         <div className="border-t border-outline-variant p-4">
           <LanguageToggle />
+          <p className="pt-3 text-center text-sm text-content-variant">
+            {t('drawer.version', { version: APP_VERSION })}
+          </p>
         </div>
       </aside>
     </>

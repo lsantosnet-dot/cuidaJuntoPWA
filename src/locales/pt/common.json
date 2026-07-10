@@ -22,7 +22,8 @@
     "close": "Fechar menu",
     "language": "Idioma",
     "sectionCare": "Cuidado",
-    "sectionAccount": "Conta"
+    "sectionAccount": "Conta",
+    "version": "Versão {{version}}"
   },
   "language": {
     "pt": "Português",

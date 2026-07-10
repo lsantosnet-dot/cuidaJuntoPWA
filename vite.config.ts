@@ -1,14 +1,23 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import { readFileSync } from 'node:fs'
 import path from 'node:path'
 
 // Base path for GitHub Pages project site: https://<user>.github.io/cuidaJuntoPWA/
 // Override with VITE_BASE_PATH (e.g. "/" for a custom domain).
 const BASE_PATH = process.env.VITE_BASE_PATH ?? '/cuidaJuntoPWA/'
 
+// Single source of truth for the app version: package.json.
+const pkg = JSON.parse(
+  readFileSync(path.resolve(__dirname, 'package.json'), 'utf-8'),
+) as { version: string }
+
 export default defineConfig({
   base: BASE_PATH,
+  define: {
+    __APP_VERSION__: JSON.stringify(pkg.version),
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
