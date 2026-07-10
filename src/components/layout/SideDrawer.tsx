@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { CARE_NAV, ACCOUNT_NAV, type NavItem } from '@/config/navigation'
 import { Icon, IconButton } from '@/components/ui'
 import { UserMenu } from '@/features/auth'
+import { useCareCircle } from '@/features/care-circle'
 import { LanguageToggle } from './LanguageToggle'
 import { APP_VERSION } from '@/config/appInfo'
 import { cn } from '@/lib/cn'
@@ -37,6 +38,7 @@ function DrawerLink({ item, onNavigate }: { item: NavItem; onNavigate: () => voi
 /** Slide-in side drawer for secondary destinations and the language switch. */
 export function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
   const { t } = useTranslation()
+  const { activeCircle } = useCareCircle()
 
   return (
     <>
@@ -57,8 +59,15 @@ export function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
           isOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >
-        <div className="flex h-16 items-center justify-between px-4">
-          <span className="text-xl font-bold text-primary">{t('app.name')}</span>
+        <div className="flex items-center justify-between px-4 pt-4">
+          <div className="min-w-0">
+            <span className="block text-xl font-bold text-primary">{t('app.name')}</span>
+            {activeCircle && (
+              <span className="block truncate text-sm text-content-variant">
+                {activeCircle.name}
+              </span>
+            )}
+          </div>
           <IconButton icon="close" label={t('drawer.close')} onClick={onClose} />
         </div>
 

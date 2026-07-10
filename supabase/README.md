@@ -18,6 +18,7 @@ No **SQL Editor** do Supabase, rode os arquivos em ordem:
 
 1. [`migrations/0001_schema.sql`](migrations/0001_schema.sql) — tabelas e índices
 2. [`migrations/0002_rls.sql`](migrations/0002_rls.sql) — funções, RLS e políticas
+3. [`migrations/0003_invites_accept.sql`](migrations/0003_invites_accept.sql) — token de convite + RPCs `get_invite`/`accept_invite` (entrar em outro círculo)
 
 > Alternativa com a CLI: `supabase link --project-ref <ref>` e depois
 > `supabase db push`.

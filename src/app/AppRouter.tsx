@@ -14,11 +14,21 @@ const HistoryPage = lazy(() => import('@/pages/HistoryPage'))
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'))
 const SettingsPage = lazy(() => import('@/pages/SettingsPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
+const JoinPage = lazy(() => import('@/pages/JoinPage'))
 
 export function AppRouter() {
   return (
     <HashRouter>
       <Routes>
+        {/* Full-page, outside the shell (like sign-in). */}
+        <Route
+          path={`${ROUTES.join}/:token`}
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <JoinPage />
+            </Suspense>
+          }
+        />
         <Route element={<AppShell />}>
           <Route
             index

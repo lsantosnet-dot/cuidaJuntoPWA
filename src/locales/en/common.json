@@ -73,7 +73,21 @@
     "remove": "Remove",
     "error": "Something went wrong",
     "saving": "Saving…",
-    "optional": "optional"
+    "optional": "optional",
+    "done": "Done"
+  },
+  "circles": {
+    "section": "My circles",
+    "create": "Create new circle",
+    "createTitle": "New care circle"
+  },
+  "join": {
+    "title": "Invitation",
+    "invitedTo": "You've been invited to",
+    "accept": "Accept invitation",
+    "invalid": "Invalid or already-used invitation.",
+    "demo": "Sign in with your account to accept invitations.",
+    "backHome": "Go to home"
   },
   "medications": {
     "add": "Add",
@@ -141,8 +155,11 @@
   "team": {
     "invite": "Invite",
     "inviteTitle": "Invite to the team",
-    "inviteHint": "They join the team when they accept the email invite.",
-    "sendInvite": "Send invite",
+    "inviteHint": "Generate an invite link for them to join the team.",
+    "inviteLinkHint": "Invite created! Share this link so they can join the circle:",
+    "copyLink": "Copy link",
+    "copied": "Link copied!",
+    "sendInvite": "Generate invite",
     "fieldEmail": "Email",
     "fieldRole": "Role",
     "membersSection_one": "{{count}} member",

@@ -73,7 +73,21 @@
     "remove": "Remover",
     "error": "Algo deu errado",
     "saving": "Salvando…",
-    "optional": "opcional"
+    "optional": "opcional",
+    "done": "Concluir"
+  },
+  "circles": {
+    "section": "Meus círculos",
+    "create": "Criar novo círculo",
+    "createTitle": "Novo círculo de cuidado"
+  },
+  "join": {
+    "title": "Convite",
+    "invitedTo": "Você foi convidado(a) para",
+    "accept": "Aceitar convite",
+    "invalid": "Convite inválido ou já utilizado.",
+    "demo": "Entre com sua conta para aceitar convites.",
+    "backHome": "Ir para o início"
   },
   "medications": {
     "add": "Adicionar",
@@ -141,8 +155,11 @@
   "team": {
     "invite": "Convidar",
     "inviteTitle": "Convidar para a equipe",
-    "inviteHint": "A pessoa entra na equipe ao aceitar o convite por e-mail.",
-    "sendInvite": "Enviar convite",
+    "inviteHint": "Gere um link de convite para a pessoa entrar na equipe.",
+    "inviteLinkHint": "Convite criado! Envie este link para a pessoa entrar no círculo:",
+    "copyLink": "Copiar link",
+    "copied": "Link copiado!",
+    "sendInvite": "Gerar convite",
     "fieldEmail": "E-mail",
     "fieldRole": "Papel",
     "membersSection_one": "{{count}} membro",

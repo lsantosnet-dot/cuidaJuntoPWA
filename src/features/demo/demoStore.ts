@@ -65,7 +65,7 @@ function seed(): DemoState {
       { id: 'mb3', circle_id: c, user_id: 'u-carlos', role: 'family', display_name: 'Carlos', email: 'carlos@exemplo.com', created_at: new Date().toISOString() },
     ],
     invites: [
-      { id: 'i1', circle_id: c, email: 'maria@exemplo.com', role: 'family', status: 'pending', invited_by: DEMO_USER_ID, created_at: new Date().toISOString() },
+      { id: 'i1', circle_id: c, email: 'maria@exemplo.com', role: 'family', status: 'pending', invited_by: DEMO_USER_ID, token: 'demo-invite-token', created_at: new Date().toISOString() },
     ],
     records: [
       { id: 'r1', circle_id: c, title: 'Hemograma completo', category: 'exam', record_date: '2026-06-28', details: 'Resultados dentro do esperado. Glicemia levemente elevada.', attachment_url: null, created_at: new Date().toISOString() },

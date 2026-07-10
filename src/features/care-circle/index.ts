@@ -1,4 +1,7 @@
 export { CareCircleProvider } from './CareCircleProvider'
 export { CareCircleGate } from './CareCircleGate'
+export { CreateCircleScreen } from './CreateCircleScreen'
+export { JoinScreen } from './JoinScreen'
+export { CircleSwitcher } from './components/CircleSwitcher'
 export { useCareCircle } from './CareCircleContext'
 export type { MembershipWithCircle, CareCircleState, MembershipRole } from './types'

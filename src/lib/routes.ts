@@ -11,7 +11,11 @@ export const ROUTES = {
   history: '/history',
   profile: '/profile',
   settings: '/settings',
+  join: '/join',
 } as const
 
 export type RouteKey = keyof typeof ROUTES
 export type RoutePath = (typeof ROUTES)[RouteKey]
+
+/** Builds the shareable invite-acceptance path for a token. */
+export const joinPath = (token: string) => `${ROUTES.join}/${token}`

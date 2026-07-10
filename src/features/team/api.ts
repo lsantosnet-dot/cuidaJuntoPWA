@@ -31,15 +31,20 @@ export async function fetchInvites(
 export async function createInvite(
   supabase: AppSupabaseClient,
   input: { circleId: string; invitedBy: string; invite: NewInvite },
-): Promise<void> {
-  const { error } = await supabase.from('invites').insert({
-    circle_id: input.circleId,
-    email: input.invite.email,
-    role: input.invite.role,
-    invited_by: input.invitedBy,
-    status: 'pending',
-  })
+): Promise<InviteRow> {
+  const { data, error } = await supabase
+    .from('invites')
+    .insert({
+      circle_id: input.circleId,
+      email: input.invite.email,
+      role: input.invite.role,
+      invited_by: input.invitedBy,
+      status: 'pending',
+    })
+    .select('*')
+    .single()
   if (error) throw error
+  return data
 }
 
 export async function revokeInvite(supabase: AppSupabaseClient, inviteId: string): Promise<void> {

@@ -119,6 +119,7 @@ export type InviteRow = {
   role: MembershipRole
   status: InviteStatus
   invited_by: string
+  token: string
   created_at: string
 }
 
@@ -151,6 +152,19 @@ export interface Database {
     Functions: {
       create_care_circle: {
         Args: { circle_name: string; recipient_name: string | null }
+        Returns: string
+      }
+      get_invite: {
+        Args: { invite_token: string }
+        Returns: {
+          circle_id: string
+          circle_name: string
+          role: MembershipRole
+          status: InviteStatus
+        }[]
+      }
+      accept_invite: {
+        Args: { invite_token: string }
         Returns: string
       }
     }

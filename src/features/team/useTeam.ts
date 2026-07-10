@@ -36,28 +36,25 @@ export function useTeam() {
   }, [reload])
 
   const invite = useCallback(
-    async (input: NewInvite) => {
+    async (input: NewInvite): Promise<InviteRow> => {
       if (mode === 'demo') {
-        updateDemo((prev) => ({
-          ...prev,
-          invites: [
-            {
-              id: uuid(),
-              circle_id: circleId,
-              email: input.email,
-              role: input.role,
-              status: 'pending',
-              invited_by: user.id,
-              created_at: new Date().toISOString(),
-            },
-            ...prev.invites,
-          ],
-        }))
-        return
+        const created: InviteRow = {
+          id: uuid(),
+          circle_id: circleId,
+          email: input.email,
+          role: input.role,
+          status: 'pending',
+          invited_by: user.id,
+          token: uuid(),
+          created_at: new Date().toISOString(),
+        }
+        updateDemo((prev) => ({ ...prev, invites: [created, ...prev.invites] }))
+        return created
       }
-      if (!supabase) return
-      await createInvite(supabase, { circleId, invitedBy: user.id, invite: input })
+      if (!supabase) throw new Error('Supabase not configured')
+      const created = await createInvite(supabase, { circleId, invitedBy: user.id, invite: input })
       await reload()
+      return created
     },
     [mode, supabase, circleId, user, reload],
   )
