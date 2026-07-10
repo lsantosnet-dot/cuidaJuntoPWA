@@ -1,0 +1,81 @@
+{
+  "app": {
+    "name": "CuidaJunto",
+    "tagline": "Shared care, as a team."
+  },
+  "nav": {
+    "home": "Home",
+    "schedule": "Schedule",
+    "medications": "Meds",
+    "diary": "Diary",
+    "team": "Team",
+    "history": "History",
+    "profile": "Care profile",
+    "settings": "Settings"
+  },
+  "header": {
+    "openMenu": "Open menu",
+    "sos": "SOS"
+  },
+  "drawer": {
+    "title": "Menu",
+    "close": "Close menu",
+    "language": "Language",
+    "sectionCare": "Care",
+    "sectionAccount": "Account"
+  },
+  "language": {
+    "pt": "Português",
+    "en": "English"
+  },
+  "sos": {
+    "title": "Emergency",
+    "description": "This will alert your whole care team immediately.",
+    "confirm": "Trigger SOS",
+    "cancel": "Cancel"
+  },
+  "common": {
+    "comingSoon": "Coming soon",
+    "underConstruction": "This module will be built in the next phases.",
+    "loading": "Loading…"
+  },
+  "pages": {
+    "home": {
+      "title": "Home",
+      "subtitle": "Today's care at a glance."
+    },
+    "schedule": {
+      "title": "Care schedule",
+      "subtitle": "Who cares, and when."
+    },
+    "medications": {
+      "title": "Today's meds",
+      "subtitle": "Scheduled and confirmed doses."
+    },
+    "diary": {
+      "title": "Care diary",
+      "subtitle": "The team's entries."
+    },
+    "team": {
+      "title": "Care team",
+      "subtitle": "Family members and caregivers."
+    },
+    "history": {
+      "title": "Medical history",
+      "subtitle": "Exams, appointments and documents."
+    },
+    "profile": {
+      "title": "Care profile",
+      "subtitle": "Details and health conditions."
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "App preferences."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "subtitle": "The address you tried does not exist.",
+      "back": "Back to home"
+    }
+  }
+}

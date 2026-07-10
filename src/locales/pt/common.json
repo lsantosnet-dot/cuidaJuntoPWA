@@ -1,0 +1,81 @@
+{
+  "app": {
+    "name": "CuidaJunto",
+    "tagline": "Cuidado compartilhado, em equipe."
+  },
+  "nav": {
+    "home": "Início",
+    "schedule": "Escala",
+    "medications": "Remédios",
+    "diary": "Diário",
+    "team": "Equipe",
+    "history": "Histórico",
+    "profile": "Perfil do idoso",
+    "settings": "Configurações"
+  },
+  "header": {
+    "openMenu": "Abrir menu",
+    "sos": "SOS"
+  },
+  "drawer": {
+    "title": "Menu",
+    "close": "Fechar menu",
+    "language": "Idioma",
+    "sectionCare": "Cuidado",
+    "sectionAccount": "Conta"
+  },
+  "language": {
+    "pt": "Português",
+    "en": "English"
+  },
+  "sos": {
+    "title": "Emergência",
+    "description": "Isto alertará toda a equipe de cuidado imediatamente.",
+    "confirm": "Acionar SOS",
+    "cancel": "Cancelar"
+  },
+  "common": {
+    "comingSoon": "Em breve",
+    "underConstruction": "Este módulo será construído nas próximas fases.",
+    "loading": "Carregando…"
+  },
+  "pages": {
+    "home": {
+      "title": "Início",
+      "subtitle": "Visão geral do cuidado de hoje."
+    },
+    "schedule": {
+      "title": "Escala de plantão",
+      "subtitle": "Quem cuida e quando."
+    },
+    "medications": {
+      "title": "Remédios do dia",
+      "subtitle": "Doses agendadas e confirmadas."
+    },
+    "diary": {
+      "title": "Diário de cuidados",
+      "subtitle": "Registros da equipe."
+    },
+    "team": {
+      "title": "Equipe de cuidado",
+      "subtitle": "Familiares e cuidadores."
+    },
+    "history": {
+      "title": "Histórico médico",
+      "subtitle": "Exames, consultas e documentos."
+    },
+    "profile": {
+      "title": "Perfil do idoso",
+      "subtitle": "Dados e condições de saúde."
+    },
+    "settings": {
+      "title": "Configurações",
+      "subtitle": "Preferências do aplicativo."
+    },
+    "notFound": {
+      "title": "Página não encontrada",
+      "subtitle": "O endereço acessado não existe.",
+      "back": "Voltar ao início"
+    }
+  }
+}
