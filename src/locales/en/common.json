@@ -60,7 +60,20 @@
     "title": "Emergency",
     "description": "This will alert your whole care team immediately.",
     "confirm": "Trigger SOS",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "pushTitle": "🚨 Emergency",
+    "pushBody": "Someone triggered SOS in {{circle}}. Please check now."
+  },
+  "notifications": {
+    "section": "Notifications",
+    "enable": "Enable notifications",
+    "disable": "Disable notifications",
+    "onDescription": "You'll get medication reminders and SOS alerts on this device.",
+    "offDescription": "Turn on to get medication reminders and SOS alerts.",
+    "unsupported": "This browser doesn't support notifications.",
+    "iosInstall": "On iPhone, add the app to your home screen (Share → Add to Home Screen) and open it from there to enable notifications.",
+    "notConfigured": "Notifications become available after you sign in.",
+    "blocked": "Notifications are blocked. Enable them in your browser settings."
   },
   "common": {
     "comingSoon": "Coming soon",

@@ -26,6 +26,7 @@ export const env = {
 export const isClerkConfigured = env.clerkPublishableKey !== ''
 export const isSupabaseConfigured =
   env.supabaseUrl !== '' && env.supabaseAnonKey !== ''
+export const isPushConfigured = env.vapidPublicKey !== ''
 
 /**
  * Auth is "enabled" only when Clerk is configured. Otherwise the app runs in

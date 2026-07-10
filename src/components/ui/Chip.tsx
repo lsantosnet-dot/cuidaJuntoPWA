@@ -6,9 +6,9 @@ type Tone = 'sage' | 'sand' | 'teal' | 'danger' | 'neutral'
 const TONES: Record<Tone, string> = {
   sage: 'bg-secondary-container text-secondary-on-container',
   sand: 'bg-tertiary-container text-tertiary-on-container',
-  teal: 'bg-primary-container text-primary-on',
+  teal: 'bg-primary-container text-primary-on-container',
   danger: 'bg-danger-container text-danger-on-container',
-  neutral: 'bg-surface-container-high text-content-variant',
+  neutral: 'bg-surface-high text-content-variant',
 }
 
 interface ChipProps extends HTMLAttributes<HTMLSpanElement> {

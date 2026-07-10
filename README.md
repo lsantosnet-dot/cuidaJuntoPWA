@@ -88,8 +88,13 @@ As chaves de cliente ficam em **Settings → Secrets and variables → Actions**
 - [x] **Fase 1 — Scaffold:** Vite + React + TS + Tailwind, PWA instalável, i18n PT/EN, navegação (bottom nav + drawer + SOS), design tokens.
 - [x] **Fase 2 — Auth + dados:** Clerk (com modo demo), cliente Supabase vinculado ao token, schema + RLS por círculo de cuidado, provider do círculo ativo.
 - [x] **Fase 3 — Módulos:** onboarding/círculo, dashboard, remédios, diário, escala, equipe, histórico, perfil — ligados ao Supabase, com dados de exemplo em modo demo.
-- [ ] **Fase 4 — Notificações:** push (lembrete de remédio via pg_cron + SOS imediato).
+- [x] **Fase 4 — Notificações:** Web Push (VAPID) por usuário; Edge Functions `notify` (SOS imediato) e `medication-reminders` (via pg_cron); dark mode e ajustes de UI no celular. *Requer deploy das functions/migração — ver [supabase/README](supabase/README.md#5-notificações-push-fase-4).*
 - [ ] **Fase 5 — Deploy:** ajustes finais de CI/CD e documentação.
+
+### Multi-círculo
+Um usuário pode participar de vários círculos (um idoso por círculo). Troque o
+círculo ativo em **Configurações → Meus círculos**; convide por link em **Equipe**
+e aceite em `/join/<token>`.
 
 ## ⚠️ Notas sobre push no iOS
 

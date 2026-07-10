@@ -125,7 +125,6 @@ export type InviteRow = {
 
 export type PushSubscriptionRow = {
   id: string
-  circle_id: string
   user_id: string
   endpoint: string
   p256dh: string
@@ -146,7 +145,7 @@ export interface Database {
       shifts: Table<ShiftRow, Partial<ShiftRow> & { circle_id: string; starts_at: string }, Partial<ShiftRow>>
       medical_records: Table<MedicalRecordRow, Partial<MedicalRecordRow> & { circle_id: string; title: string }, Partial<MedicalRecordRow>>
       invites: Table<InviteRow, Partial<InviteRow> & { circle_id: string; email: string; invited_by: string }, Partial<InviteRow>>
-      push_subscriptions: Table<PushSubscriptionRow, Partial<PushSubscriptionRow> & { circle_id: string; user_id: string; endpoint: string; p256dh: string; auth: string }, Partial<PushSubscriptionRow>>
+      push_subscriptions: Table<PushSubscriptionRow, Partial<PushSubscriptionRow> & { user_id: string; endpoint: string; p256dh: string; auth: string }, Partial<PushSubscriptionRow>>
     }
     Views: Record<never, never>
     Functions: {

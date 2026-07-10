@@ -23,7 +23,7 @@ export function CircleSwitcher() {
                 onClick={() => setActiveCircleId(m.circle_id)}
                 aria-pressed={active}
                 className={cn(
-                  'flex w-full min-h-touch items-center gap-3 rounded-card px-3 py-2 text-left transition-colors',
+                  'flex w-full min-h-touch items-start gap-2 rounded-card px-3 py-3 text-left transition-colors',
                   active
                     ? 'bg-primary/10 ring-2 ring-primary'
                     : 'bg-surface-container hover:bg-surface-high',
@@ -31,18 +31,20 @@ export function CircleSwitcher() {
               >
                 <span
                   className={cn(
-                    'flex h-8 w-8 items-center justify-center rounded-pill',
+                    'mt-0.5 shrink-0',
                     active ? 'text-primary' : 'text-transparent',
                   )}
                 >
                   <Icon name="check" size={20} />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-base font-semibold text-content">
+                  <span className="block break-words text-base font-semibold text-content">
                     {m.care_circles.name}
                   </span>
+                  <span className="mt-1 inline-flex">
+                    <Chip tone="neutral">{t(`team.role.${m.role}`)}</Chip>
+                  </span>
                 </span>
-                <Chip tone="neutral">{t(`team.role.${m.role}`)}</Chip>
               </button>
             </li>
           )

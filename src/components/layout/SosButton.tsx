@@ -1,17 +1,40 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, Icon, Modal } from '@/components/ui'
+import { Button, Icon, Modal, Spinner } from '@/components/ui'
 import { useDisclosure } from '@/hooks/useDisclosure'
+import { useSupabaseClient } from '@/hooks/useSupabaseClient'
+import { useCareCircle } from '@/features/care-circle'
+import { sendNotify } from '@/features/notifications'
 
 /**
  * Persistent emergency action in the header. Opens a confirmation modal to
- * prevent accidental triggers. The actual team alert is wired in Phase 4.
+ * prevent accidental triggers, then pushes an alert to the whole care team
+ * (via the `notify` Edge Function). No-op sender in demo mode.
  */
 export function SosButton() {
   const { t } = useTranslation()
   const { isOpen, open, close } = useDisclosure()
+  const supabase = useSupabaseClient()
+  const { activeCircleId, activeCircle } = useCareCircle()
+  const [sending, setSending] = useState(false)
 
-  const handleConfirm = () => {
-    // TODO(Phase 4): trigger Web Push emergency alert to the whole care team.
+  const handleConfirm = async () => {
+    if (supabase && activeCircleId) {
+      setSending(true)
+      try {
+        await sendNotify(supabase, {
+          circleId: activeCircleId,
+          title: t('sos.pushTitle'),
+          body: t('sos.pushBody', { circle: activeCircle?.name ?? '' }),
+          url: import.meta.env.BASE_URL,
+          excludeSelf: true,
+        })
+      } catch {
+        // Best-effort: never block closing the emergency dialog on a send error.
+      } finally {
+        setSending(false)
+      }
+    }
     close()
   }
 
@@ -20,7 +43,7 @@ export function SosButton() {
       <button
         type="button"
         onClick={open}
-        className="inline-flex min-h-touch items-center gap-1.5 rounded-pill bg-danger px-4 font-bold text-danger-on transition-transform active:scale-[0.96]"
+        className="inline-flex min-h-touch items-center gap-1.5 rounded-pill bg-sos px-4 font-bold text-sos-on transition-transform active:scale-[0.96]"
       >
         <Icon name="alert" size={20} />
         {t('header.sos')}
@@ -32,10 +55,10 @@ export function SosButton() {
         title={t('sos.title')}
         footer={
           <>
-            <Button variant="danger" size="lg" fullWidth onClick={handleConfirm}>
-              {t('sos.confirm')}
+            <Button variant="danger" size="lg" fullWidth onClick={handleConfirm} disabled={sending}>
+              {sending ? <Spinner size={22} className="border-sos-on/40 border-t-sos-on" /> : t('sos.confirm')}
             </Button>
-            <Button variant="ghost" fullWidth onClick={close}>
+            <Button variant="ghost" fullWidth onClick={close} disabled={sending}>
               {t('sos.cancel')}
             </Button>
           </>

@@ -60,7 +60,20 @@
     "title": "Emergência",
     "description": "Isto alertará toda a equipe de cuidado imediatamente.",
     "confirm": "Acionar SOS",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "pushTitle": "🚨 Emergência",
+    "pushBody": "Alguém acionou o SOS em {{circle}}. Verifique agora."
+  },
+  "notifications": {
+    "section": "Notificações",
+    "enable": "Ativar notificações",
+    "disable": "Desativar notificações",
+    "onDescription": "Você receberá lembretes de remédios e alertas de SOS neste aparelho.",
+    "offDescription": "Ative para receber lembretes de remédios e alertas de SOS.",
+    "unsupported": "Este navegador não suporta notificações.",
+    "iosInstall": "No iPhone, adicione o app à tela de início (compartilhar → Adicionar à Tela de Início) e abra por ali para ativar as notificações.",
+    "notConfigured": "As notificações ficam disponíveis após entrar com sua conta.",
+    "blocked": "As notificações estão bloqueadas. Habilite-as nas configurações do navegador."
   },
   "common": {
     "comingSoon": "Em breve",

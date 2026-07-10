@@ -36,6 +36,10 @@ export default {
           on: withOpacity('--color-on-error'),
           'on-container': withOpacity('--color-on-error-container'),
         },
+        sos: {
+          DEFAULT: withOpacity('--color-sos'),
+          on: withOpacity('--color-on-sos'),
+        },
         surface: {
           DEFAULT: withOpacity('--color-surface'),
           lowest: withOpacity('--color-surface-container-lowest'),

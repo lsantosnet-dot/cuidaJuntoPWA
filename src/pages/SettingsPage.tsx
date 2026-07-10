@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { PageHeader, Card } from '@/components/ui'
 import { LanguageToggle } from '@/components/layout/LanguageToggle'
 import { CircleSwitcher } from '@/features/care-circle'
+import { NotificationsCard } from '@/features/notifications'
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -23,6 +24,10 @@ export default function SettingsPage() {
 
       <Section title={t('circles.section')}>
         <CircleSwitcher />
+      </Section>
+
+      <Section title={t('notifications.section')}>
+        <NotificationsCard />
       </Section>
 
       <Section title={t('drawer.language')}>
