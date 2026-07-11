@@ -9,6 +9,7 @@ const DashboardPage = lazy(() => import('@/pages/DashboardPage'))
 const SchedulePage = lazy(() => import('@/pages/SchedulePage'))
 const MedicationsPage = lazy(() => import('@/pages/MedicationsPage'))
 const DiaryPage = lazy(() => import('@/pages/DiaryPage'))
+const CirclesPage = lazy(() => import('@/pages/CirclesPage'))
 const TeamPage = lazy(() => import('@/pages/TeamPage'))
 const CostsPage = lazy(() => import('@/pages/CostsPage'))
 const HistoryPage = lazy(() => import('@/pages/HistoryPage'))
@@ -60,6 +61,14 @@ export function AppRouter() {
             element={
               <Suspense fallback={<RouteFallback />}>
                 <DiaryPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.circles}
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <CirclesPage />
               </Suspense>
             }
           />

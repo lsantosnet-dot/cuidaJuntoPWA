@@ -7,6 +7,7 @@ export const ROUTES = {
   schedule: '/schedule',
   medications: '/medications',
   diary: '/diary',
+  circles: '/circles',
   team: '/team',
   costs: '/costs',
   history: '/history',
