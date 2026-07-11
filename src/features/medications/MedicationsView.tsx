@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHeader, Button, Icon, EmptyState, Spinner } from '@/components/ui'
+import { PageHeader, Button, Icon, EmptyState, Spinner, ConfirmDialog } from '@/components/ui'
 import { useDisclosure } from '@/hooks/useDisclosure'
 import { useMedications } from './useMedications'
 import { DoseCard } from './components/DoseCard'
@@ -9,9 +9,12 @@ import type { Dose } from './types'
 
 export function MedicationsView() {
   const { t } = useTranslation()
-  const { doses, isLoading, error, markTaken, undo, addMedication } = useMedications()
+  const { doses, isLoading, error, markTaken, undo, addMedication, removeMedication } =
+    useMedications()
   const form = useDisclosure()
   const [busyKey, setBusyKey] = useState<string | null>(null)
+  const [pendingDelete, setPendingDelete] = useState<Dose | null>(null)
+  const [deleting, setDeleting] = useState(false)
 
   const runOn = async (dose: Dose, fn: (d: Dose) => Promise<void>) => {
     setBusyKey(dose.key)
@@ -19,6 +22,17 @@ export function MedicationsView() {
       await fn(dose)
     } finally {
       setBusyKey(null)
+    }
+  }
+
+  const confirmDelete = async () => {
+    if (!pendingDelete) return
+    setDeleting(true)
+    try {
+      await removeMedication(pendingDelete.medicationId)
+      setPendingDelete(null)
+    } finally {
+      setDeleting(false)
     }
   }
 
@@ -63,6 +77,7 @@ export function MedicationsView() {
                 busy={busyKey === dose.key}
                 onMarkTaken={(d) => runOn(d, markTaken)}
                 onUndo={(d) => runOn(d, undo)}
+                onDelete={setPendingDelete}
               />
             </li>
           ))}
@@ -70,6 +85,17 @@ export function MedicationsView() {
       )}
 
       <AddMedicationForm isOpen={form.isOpen} onClose={form.close} onSubmit={addMedication} />
+
+      <ConfirmDialog
+        isOpen={pendingDelete !== null}
+        onClose={() => setPendingDelete(null)}
+        onConfirm={() => void confirmDelete()}
+        busy={deleting}
+        title={t('medications.deleteTitle')}
+        description={t('medications.deleteDescription')}
+        confirmLabel={t('common.delete')}
+        cancelLabel={t('common.cancel')}
+      />
     </div>
   )
 }

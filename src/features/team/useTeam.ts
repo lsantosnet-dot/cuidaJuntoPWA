@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useCareData } from '@/features/data/useCareData'
 import { useDemoState, updateDemo } from '@/features/demo/demoStore'
 import { uuid } from '@/lib/id'
-import { fetchMembers, fetchInvites, createInvite, revokeInvite } from './api'
+import { fetchMembers, fetchInvites, createInvite, revokeInvite, removeMember } from './api'
 import type { MembershipRow, InviteRow, NewInvite } from './types'
 
 export function useTeam() {
@@ -75,6 +75,22 @@ export function useTeam() {
     [mode, supabase, reload],
   )
 
+  const remove = useCallback(
+    async (membershipId: string) => {
+      if (mode === 'demo') {
+        updateDemo((prev) => ({
+          ...prev,
+          members: prev.members.filter((m) => m.id !== membershipId),
+        }))
+        return
+      }
+      if (!supabase) return
+      await removeMember(supabase, membershipId)
+      await reload()
+    },
+    [mode, supabase, reload],
+  )
+
   return {
     members: mode === 'demo' ? demo.members : members,
     invites: mode === 'demo' ? demo.invites : invites,
@@ -82,5 +98,7 @@ export function useTeam() {
     error,
     invite,
     revoke,
+    remove,
+    currentUserId: user.id,
   }
 }

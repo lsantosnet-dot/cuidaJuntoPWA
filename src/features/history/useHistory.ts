@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useCareData } from '@/features/data/useCareData'
 import { useDemoState, updateDemo } from '@/features/demo/demoStore'
 import { uuid } from '@/lib/id'
-import { fetchRecords, addRecord } from './api'
+import { fetchRecords, addRecord, deleteRecord } from './api'
 import type { MedicalRecordRow, NewRecord } from './types'
 
 export function useHistory() {
@@ -57,5 +57,21 @@ export function useHistory() {
     [mode, supabase, circleId, reload],
   )
 
-  return { records: mode === 'demo' ? demo.records : records, isLoading, error, add }
+  const remove = useCallback(
+    async (recordId: string) => {
+      if (mode === 'demo') {
+        updateDemo((prev) => ({
+          ...prev,
+          records: prev.records.filter((r) => r.id !== recordId),
+        }))
+        return
+      }
+      if (!supabase) return
+      await deleteRecord(supabase, recordId)
+      await reload()
+    },
+    [mode, supabase, reload],
+  )
+
+  return { records: mode === 'demo' ? demo.records : records, isLoading, error, add, remove }
 }

@@ -14,6 +14,14 @@ export async function fetchDiary(
   return data ?? []
 }
 
+export async function deleteDiaryEntry(
+  supabase: AppSupabaseClient,
+  entryId: string,
+): Promise<void> {
+  const { error } = await supabase.from('diary_entries').delete().eq('id', entryId)
+  if (error) throw error
+}
+
 export async function addDiaryEntry(
   supabase: AppSupabaseClient,
   input: { circleId: string; authorId: string; authorName: string; entry: NewDiaryEntry },

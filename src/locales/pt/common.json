@@ -93,7 +93,8 @@
     "error": "Algo deu errado",
     "saving": "Salvando…",
     "optional": "opcional",
-    "done": "Concluir"
+    "done": "Concluir",
+    "delete": "Excluir"
   },
   "circles": {
     "section": "Meus círculos",
@@ -124,7 +125,10 @@
     "removeTime": "Remover horário",
     "fieldInstructions": "Instruções",
     "emptyTitle": "Nenhum remédio cadastrado",
-    "emptyDescription": "Adicione os medicamentos e horários para acompanhar as doses do dia."
+    "emptyDescription": "Adicione os medicamentos e horários para acompanhar as doses do dia.",
+    "deleteLabel": "Excluir remédio",
+    "deleteTitle": "Excluir remédio",
+    "deleteDescription": "Isto removerá o remédio e todo o seu histórico de doses. Esta ação não pode ser desfeita."
   },
   "diary": {
     "add": "Novo registro",
@@ -134,6 +138,9 @@
     "appetiteLabel": "Apetite",
     "emptyTitle": "Diário vazio",
     "emptyDescription": "Registre como o dia está transcorrendo para toda a equipe acompanhar.",
+    "deleteLabel": "Excluir registro",
+    "deleteTitle": "Excluir registro",
+    "deleteDescription": "Este registro do diário será excluído permanentemente.",
     "mood": {
       "label": "Humor",
       "great": "Ótimo",
@@ -187,6 +194,9 @@
     "invitesSection": "Convites pendentes",
     "pending": "Pendente",
     "revoke": "Cancelar",
+    "removeLabel": "Remover membro",
+    "removeTitle": "Remover membro",
+    "removeDescription": "{{name}} perderá o acesso a este círculo de cuidado.",
     "role": {
       "admin": "Administrador",
       "family": "Familiar",
@@ -202,6 +212,9 @@
     "fieldDetails": "Detalhes",
     "emptyTitle": "Histórico vazio",
     "emptyDescription": "Registre exames, consultas e documentos para manter tudo em um só lugar.",
+    "deleteLabel": "Excluir registro",
+    "deleteTitle": "Excluir registro",
+    "deleteDescription": "Este registro do histórico médico será excluído permanentemente.",
     "category": {
       "exam": "Exame",
       "appointment": "Consulta",

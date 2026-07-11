@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useCareData } from '@/features/data/useCareData'
 import { useDemoState, updateDemo } from '@/features/demo/demoStore'
 import { uuid } from '@/lib/id'
-import { fetchDiary, addDiaryEntry } from './api'
+import { fetchDiary, addDiaryEntry, deleteDiaryEntry } from './api'
 import type { DiaryEntryRow, NewDiaryEntry } from './types'
 
 export function useDiary() {
@@ -63,7 +63,23 @@ export function useDiary() {
     [mode, supabase, circleId, user, reload],
   )
 
+  const remove = useCallback(
+    async (entryId: string) => {
+      if (mode === 'demo') {
+        updateDemo((prev) => ({
+          ...prev,
+          diary: prev.diary.filter((e) => e.id !== entryId),
+        }))
+        return
+      }
+      if (!supabase) return
+      await deleteDiaryEntry(supabase, entryId)
+      await reload()
+    },
+    [mode, supabase, reload],
+  )
+
   const list = mode === 'demo' ? demo.diary : entries
 
-  return { entries: list, isLoading, error, add }
+  return { entries: list, isLoading, error, add, remove }
 }

@@ -1,11 +1,18 @@
 import { useTranslation } from 'react-i18next'
-import { Card, Avatar, Chip } from '@/components/ui'
+import { Card, Avatar, Chip, IconButton } from '@/components/ui'
 import { useLanguage } from '@/hooks/useLanguage'
 import { formatDayLabel, formatTime } from '@/lib/datetime'
 import { MOOD_EMOJI, type DiaryEntryRow } from '../types'
 
 /** One diary entry: author, timestamp, note and well-being tags. */
-export function DiaryCard({ entry }: { entry: DiaryEntryRow }) {
+export function DiaryCard({
+  entry,
+  onDelete,
+}: {
+  entry: DiaryEntryRow
+  /** Omit to hide the delete action (e.g. dashboard preview tile). */
+  onDelete?: (entry: DiaryEntryRow) => void
+}) {
   const { t } = useTranslation()
   const { current } = useLanguage()
 
@@ -23,6 +30,15 @@ export function DiaryCard({ entry }: { entry: DiaryEntryRow }) {
           <span className="text-2xl" aria-label={t(`diary.mood.${entry.mood}`)}>
             {MOOD_EMOJI[entry.mood]}
           </span>
+        )}
+        {onDelete && (
+          <IconButton
+            label={t('diary.deleteLabel')}
+            icon="trash"
+            iconSize={20}
+            className="shrink-0 text-content-variant hover:text-sos"
+            onClick={() => onDelete(entry)}
+          />
         )}
       </div>
 
