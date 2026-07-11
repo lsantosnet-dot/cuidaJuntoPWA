@@ -23,6 +23,9 @@ function apply(pref: ThemePref) {
   document
     .querySelectorAll('meta[name="theme-color"]')
     .forEach((m) => m.setAttribute('content', dark ? THEME_COLORS.dark : THEME_COLORS.light))
+  document
+    .querySelectorAll('meta[name="color-scheme"]')
+    .forEach((m) => m.setAttribute('content', dark ? 'dark' : 'only light'))
 }
 
 /**

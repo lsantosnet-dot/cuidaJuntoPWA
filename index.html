@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <!-- color-scheme is controlled by CSS (`only light` / `.dark`), NOT a meta:
-         a static "light dark" here would re-enable Chrome Android's auto-dark
-         over the light theme. theme-color is kept in sync by useTheme. -->
+    <!-- color-scheme meta tag prevents Chrome Android's Auto Dark Theme from forcing
+         colors on the light theme. Kept in sync dynamically by the script below and useTheme. -->
+    <meta name="color-scheme" content="only light" />
     <meta name="theme-color" content="#00535b" />
     <meta name="description" content="Coordene o cuidado do seu familiar em equipe." />
     <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
@@ -28,6 +28,11 @@
             ((pref === null || pref === 'system') &&
               window.matchMedia('(prefers-color-scheme: dark)').matches)
           document.documentElement.classList.toggle('dark', dark)
+          
+          var meta = document.querySelector('meta[name="color-scheme"]')
+          if (meta) {
+            meta.setAttribute('content', dark ? 'dark' : 'only light')
+          }
         } catch (e) {
           /* first paint falls back to light */
         }
