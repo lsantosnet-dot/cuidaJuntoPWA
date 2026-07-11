@@ -21,7 +21,7 @@ export function DoseCard({ dose, onMarkTaken, onUndo, busy }: DoseCardProps) {
   return (
     <div className="flex overflow-hidden rounded-card bg-surface-lowest shadow-card dark:ring-1 dark:ring-white/10">
       <span className={cn('w-1.5 shrink-0', taken ? 'bg-secondary' : 'bg-tertiary')} aria-hidden="true" />
-      <div className="flex flex-1 items-center gap-3 p-4">
+      <div className="flex min-w-0 flex-1 items-center gap-3 p-4">
         <div className="flex flex-col items-center">
           <span className="text-lg font-bold text-content">{dose.time}</span>
         </div>
