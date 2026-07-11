@@ -202,6 +202,8 @@
     "you": "You",
     "unnamed": "Unnamed member",
     "memberSince": "Member since {{date}}",
+    "expandLabel": "View member details",
+    "collapseLabel": "Hide member details",
     "role": {
       "admin": "Admin",
       "family": "Family",

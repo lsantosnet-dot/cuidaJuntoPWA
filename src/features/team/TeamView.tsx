@@ -1,33 +1,14 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  PageHeader,
-  Button,
-  Icon,
-  IconButton,
-  EmptyState,
-  Spinner,
-  Card,
-  Avatar,
-  Chip,
-  ConfirmDialog,
-} from '@/components/ui'
+import { PageHeader, Button, Icon, EmptyState, Spinner, Card, ConfirmDialog } from '@/components/ui'
 import { useDisclosure } from '@/hooks/useDisclosure'
-import { useLanguage } from '@/hooks/useLanguage'
-import { formatDate } from '@/lib/datetime'
 import { useTeam } from './useTeam'
 import { InviteForm } from './components/InviteForm'
-import type { MembershipRole, MembershipRow } from './types'
-
-const ROLE_TONE: Record<MembershipRole, 'teal' | 'sage' | 'sand'> = {
-  admin: 'teal',
-  family: 'sand',
-  caregiver: 'sage',
-}
+import { MemberCard } from './components/MemberCard'
+import type { MembershipRow } from './types'
 
 export function TeamView() {
   const { t } = useTranslation()
-  const { current } = useLanguage()
   const { members, invites, isLoading, error, invite, revoke, remove, currentUserId } = useTeam()
   const form = useDisclosure()
   const [pendingDelete, setPendingDelete] = useState<MembershipRow | null>(null)
@@ -69,48 +50,16 @@ export function TeamView() {
               {t('team.membersSection', { count: members.length })}
             </h2>
             <ul className="flex flex-col gap-3">
-              {members.map((m) => {
-                const isYou = m.user_id === currentUserId
-                const name = m.display_name ?? m.email ?? t('team.unnamed')
-                const youLabel = t('team.you')
-                const detail = m.email ?? t('team.memberSince', { date: formatDate(m.created_at, current) })
-                return (
-                  <li key={m.id}>
-                    <Card>
-                      <div className="flex items-start gap-3">
-                        <Avatar name={name} src={m.avatar_url} size={48} className="mt-0.5 shrink-0" />
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-2">
-                            <p className="truncate text-base font-bold text-content">
-                              {name}
-                              {isYou && name !== youLabel && (
-                                <span className="font-normal text-content-variant"> · {youLabel}</span>
-                              )}
-                            </p>
-                            {isAdmin && !isYou && (
-                              <IconButton
-                                label={t('team.removeLabel')}
-                                icon="trash"
-                                iconSize={20}
-                                className="ml-auto shrink-0 text-content-variant hover:text-sos"
-                                onClick={() => setPendingDelete(m)}
-                              />
-                            )}
-                          </div>
-                          <div className="mt-0.5 flex items-center gap-2">
-                            <p className="truncate text-sm text-content-variant" title={detail}>
-                              {detail}
-                            </p>
-                            <Chip tone={ROLE_TONE[m.role]} className="ml-auto shrink-0">
-                              {t(`team.role.${m.role}`)}
-                            </Chip>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  </li>
-                )
-              })}
+              {members.map((m) => (
+                <li key={m.id}>
+                  <MemberCard
+                    member={m}
+                    isYou={m.user_id === currentUserId}
+                    canRemove={isAdmin && m.user_id !== currentUserId}
+                    onDelete={setPendingDelete}
+                  />
+                </li>
+              ))}
             </ul>
           </section>
 
