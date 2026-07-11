@@ -2,10 +2,34 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // Chrome on Android decides whether to run Auto Dark Theme (which
+      // force-inverts colors on pages it thinks don't support dark mode) from
+      // the color-scheme meta tag's value AT PARSE TIME — a later JS mutation
+      // (e.g. from useTheme) is too late to change that decision. Previously
+      // this file always started with a static `content="only light"` meta
+      // tag, so whenever the resolved theme was actually dark, Chrome saw
+      // "only light" during parsing, concluded the page had no dark support,
+      // and force-darkened our real dark theme on top of itself (the
+      // washed-out, unreadable colors reported on Android). Writing the meta
+      // tag ourselves — before the browser reaches this point in <head> —
+      // with the correct value from the start avoids that double-darkening.
+      ;(function () {
+        var dark = false
+        try {
+          var pref = localStorage.getItem('cuidajunto.theme')
+          dark =
+            pref === 'dark' ||
+            ((pref === null || pref === 'system') &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches)
+        } catch (e) {
+          /* first paint falls back to light */
+        }
+        document.documentElement.classList.toggle('dark', dark)
+        document.write('<meta name="color-scheme" content="' + (dark ? 'dark' : 'only light') + '">')
+      })()
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <!-- color-scheme meta tag prevents Chrome Android's Auto Dark Theme from forcing
-         colors on the light theme. Kept in sync dynamically by the script below and useTheme. -->
-    <meta name="color-scheme" content="only light" />
     <meta name="theme-color" content="#00535b" />
     <meta name="description" content="Coordene o cuidado do seu familiar em equipe." />
     <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
@@ -17,27 +41,6 @@
       rel="stylesheet"
     />
     <title>CuidaJunto</title>
-    <script>
-      // Apply the saved theme before first paint to avoid a light/dark flash.
-      // Kept inline and tiny on purpose; the React hook takes over after mount.
-      ;(function () {
-        try {
-          var pref = localStorage.getItem('cuidajunto.theme')
-          var dark =
-            pref === 'dark' ||
-            ((pref === null || pref === 'system') &&
-              window.matchMedia('(prefers-color-scheme: dark)').matches)
-          document.documentElement.classList.toggle('dark', dark)
-          
-          var meta = document.querySelector('meta[name="color-scheme"]')
-          if (meta) {
-            meta.setAttribute('content', dark ? 'dark' : 'only light')
-          }
-        } catch (e) {
-          /* first paint falls back to light */
-        }
-      })()
-    </script>
   </head>
   <body>
     <div id="root"></div>
