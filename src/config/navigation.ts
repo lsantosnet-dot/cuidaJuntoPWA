@@ -21,6 +21,7 @@ export const PRIMARY_NAV: NavItem[] = [
 
 /** Secondary destinations shown in the side drawer, grouped by section. */
 export const CARE_NAV: NavItem[] = [
+  { path: ROUTES.circles, labelKey: 'nav.circles', icon: 'circles' },
   { path: ROUTES.team, labelKey: 'nav.team', icon: 'users' },
   { path: ROUTES.history, labelKey: 'nav.history', icon: 'history' },
   { path: ROUTES.profile, labelKey: 'nav.profile', icon: 'user' },

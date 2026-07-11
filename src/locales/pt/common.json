@@ -8,6 +8,7 @@
     "schedule": "Escala",
     "medications": "Remédios",
     "diary": "Diário",
+    "circles": "Meus Círculos",
     "team": "Equipe",
     "costs": "Custos",
     "history": "Histórico médico",
@@ -135,7 +136,6 @@
     "delete": "Excluir"
   },
   "circles": {
-    "section": "Meus círculos",
     "create": "Criar novo círculo",
     "createTitle": "Novo círculo de cuidado"
   },
@@ -336,6 +336,10 @@
     "diary": {
       "title": "Diário de cuidados",
       "subtitle": "Registros da equipe."
+    },
+    "circles": {
+      "title": "Meus círculos",
+      "subtitle": "Gerencie e troque entre seus círculos de cuidado."
     },
     "team": {
       "title": "Equipe de cuidado",

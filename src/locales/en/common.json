@@ -8,6 +8,7 @@
     "schedule": "Schedule",
     "medications": "Meds",
     "diary": "Diary",
+    "circles": "My Circles",
     "team": "Team",
     "costs": "Costs",
     "history": "Medical History",
@@ -135,7 +136,6 @@
     "delete": "Delete"
   },
   "circles": {
-    "section": "My circles",
     "create": "Create new circle",
     "createTitle": "New care circle"
   },
@@ -336,6 +336,10 @@
     "diary": {
       "title": "Care diary",
       "subtitle": "The team's entries."
+    },
+    "circles": {
+      "title": "My circles",
+      "subtitle": "Manage and switch between your care circles."
     },
     "team": {
       "title": "Care team",
