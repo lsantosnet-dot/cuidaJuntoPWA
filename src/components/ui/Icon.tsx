@@ -85,6 +85,13 @@ const ICON_PATHS = {
       <path d="M10 11v6M14 11v6" />
     </>
   ),
+  wallet: (
+    <>
+      <path d="M4 7.5A2 2 0 0 1 6 5.5h10.5a1.5 1.5 0 0 1 1.5 1.5v2" />
+      <rect x="3" y="9" width="18" height="10.5" rx="2.5" />
+      <circle cx="16.5" cy="14.2" r="1.1" />
+    </>
+  ),
 } as const
 
 export type IconName = keyof typeof ICON_PATHS

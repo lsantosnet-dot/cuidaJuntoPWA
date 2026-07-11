@@ -10,6 +10,7 @@ const SchedulePage = lazy(() => import('@/pages/SchedulePage'))
 const MedicationsPage = lazy(() => import('@/pages/MedicationsPage'))
 const DiaryPage = lazy(() => import('@/pages/DiaryPage'))
 const TeamPage = lazy(() => import('@/pages/TeamPage'))
+const CostsPage = lazy(() => import('@/pages/CostsPage'))
 const HistoryPage = lazy(() => import('@/pages/HistoryPage'))
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'))
 const SettingsPage = lazy(() => import('@/pages/SettingsPage'))
@@ -67,6 +68,14 @@ export function AppRouter() {
             element={
               <Suspense fallback={<RouteFallback />}>
                 <TeamPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.costs}
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <CostsPage />
               </Suspense>
             }
           />
