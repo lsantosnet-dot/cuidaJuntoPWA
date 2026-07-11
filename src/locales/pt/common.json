@@ -120,7 +120,8 @@
     "fieldDosage": "Dosagem",
     "dosagePlaceholder": "ex.: 850 mg",
     "fieldTimes": "Horários",
-    "timesHint": "Separe por vírgula. Ex.: 08:00, 20:00",
+    "addTime": "Adicionar horário",
+    "removeTime": "Remover horário",
     "fieldInstructions": "Instruções",
     "emptyTitle": "Nenhum remédio cadastrado",
     "emptyDescription": "Adicione os medicamentos e horários para acompanhar as doses do dia."

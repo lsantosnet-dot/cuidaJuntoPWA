@@ -120,7 +120,8 @@
     "fieldDosage": "Dosage",
     "dosagePlaceholder": "e.g. 850 mg",
     "fieldTimes": "Times",
-    "timesHint": "Comma-separated. E.g. 08:00, 20:00",
+    "addTime": "Add time",
+    "removeTime": "Remove time",
     "fieldInstructions": "Instructions",
     "emptyTitle": "No medications yet",
     "emptyDescription": "Add medications and times to track today's doses."
