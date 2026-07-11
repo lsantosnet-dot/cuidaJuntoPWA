@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#00535b" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0f1414" media="(prefers-color-scheme: dark)" />
+    <!-- color-scheme is controlled by CSS (`only light` / `.dark`), NOT a meta:
+         a static "light dark" here would re-enable Chrome Android's auto-dark
+         over the light theme. theme-color is kept in sync by useTheme. -->
+    <meta name="theme-color" content="#00535b" />
     <meta name="description" content="Coordene o cuidado do seu familiar em equipe." />
     <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
     <link rel="apple-touch-icon" href="icons/icon-192.png" />

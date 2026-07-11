@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Button, Icon, Chip } from '@/components/ui'
 import { useDisclosure } from '@/hooks/useDisclosure'
+import { ROUTES } from '@/lib/routes'
 import { cn } from '@/lib/cn'
 import { useCareCircle } from '../CareCircleContext'
 import { CreateCircleModal } from './CreateCircleModal'
@@ -8,8 +10,17 @@ import { CreateCircleModal } from './CreateCircleModal'
 /** Lists the circles the user belongs to and switches the active one. */
 export function CircleSwitcher() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const { memberships, activeCircleId, setActiveCircleId } = useCareCircle()
   const create = useDisclosure()
+
+  // Switching context sends the user to the dashboard of the new circle, so
+  // it's immediately obvious the whole app now reflects the other recipient.
+  const switchTo = (circleId: string) => {
+    const changed = circleId !== activeCircleId
+    setActiveCircleId(circleId)
+    if (changed) navigate(ROUTES.home)
+  }
 
   return (
     <div className="flex flex-col gap-3">
@@ -20,7 +31,7 @@ export function CircleSwitcher() {
             <li key={m.circle_id}>
               <button
                 type="button"
-                onClick={() => setActiveCircleId(m.circle_id)}
+                onClick={() => switchTo(m.circle_id)}
                 aria-pressed={active}
                 className={cn(
                   'flex w-full min-h-touch items-start gap-2 rounded-card px-3 py-3 text-left transition-colors',

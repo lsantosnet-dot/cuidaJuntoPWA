@@ -9,9 +9,11 @@
  * under `.dark`.
  */
 :root {
-  /* Declaring a color scheme stops browsers from force-darkening the page.
-     The `.dark` class (set pre-paint from the user's preference) switches it. */
-  color-scheme: light;
+  /* `only light` is the official opt-out from Chrome Android's Auto Dark Theme,
+     which otherwise force-darkens light pages when the phone is in dark mode —
+     exactly what was garbling the app. The `.dark` class (set pre-paint from
+     the user's preference) switches to our real dark palette. */
+  color-scheme: only light;
 
   --color-primary: 0 83 91;
   --color-primary-container: 0 109 119;
