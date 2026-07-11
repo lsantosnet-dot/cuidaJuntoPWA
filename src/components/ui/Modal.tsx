@@ -40,7 +40,8 @@ export function Modal({ isOpen, onClose, title, children, footer }: ModalProps) 
       />
       <div
         className={cn(
-          'relative z-10 w-full max-w-app rounded-card bg-surface-lowest p-6 shadow-modal',
+          'relative z-10 flex max-h-[calc(100vh-2.5rem)] w-full max-w-app flex-col',
+          'overflow-y-auto rounded-card bg-surface-lowest p-6 shadow-modal',
         )}
       >
         <h2 className="text-xl font-bold text-content">{title}</h2>
