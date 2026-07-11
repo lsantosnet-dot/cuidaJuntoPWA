@@ -23,6 +23,7 @@
     "language": "Language",
     "sectionCare": "Care",
     "sectionAccount": "Account",
+    "tutorial": "View tutorial",
     "version": "Version {{version}}"
   },
   "language": {
@@ -80,6 +81,42 @@
     "iosInstall": "On iPhone, add the app to your home screen (Share → Add to Home Screen) and open it from there to enable notifications.",
     "notConfigured": "Notifications become available after you sign in.",
     "blocked": "Notifications are blocked. Enable them in your browser settings."
+  },
+  "tutorial": {
+    "title": "CuidaJunto tutorial",
+    "actions": {
+      "skip": "Skip",
+      "next": "Next",
+      "back": "Back",
+      "finish": "Start using the app",
+      "enableNotifications": "Enable notifications"
+    },
+    "slides": {
+      "welcome": {
+        "title": "Welcome to CuidaJunto",
+        "description": "The easy way to care as a team: organize medications, shifts and the care diary all in one place."
+      },
+      "medications": {
+        "title": "Medications, always on time",
+        "description": "Add medications and their times. Anyone on the team can mark doses as taken, and everyone stays in the loop."
+      },
+      "schedule": {
+        "title": "Care schedule",
+        "description": "Organize who cares and when. Take a shift or see who's on duty right now."
+      },
+      "diary": {
+        "title": "Care diary",
+        "description": "Log mood, sleep, appetite and notes about the day for the whole team to follow."
+      },
+      "team": {
+        "title": "Care team",
+        "description": "Invite family members and caregivers to the care circle and keep everyone connected."
+      },
+      "notifications": {
+        "title": "Stay on top of everything",
+        "description": "Turn on notifications to get medication reminders and SOS alerts right on your phone."
+      }
+    }
   },
   "common": {
     "comingSoon": "Coming soon",

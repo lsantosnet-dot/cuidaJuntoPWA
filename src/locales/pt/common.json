@@ -23,6 +23,7 @@
     "language": "Idioma",
     "sectionCare": "Cuidado",
     "sectionAccount": "Conta",
+    "tutorial": "Ver tutorial",
     "version": "Versão {{version}}"
   },
   "language": {
@@ -80,6 +81,42 @@
     "iosInstall": "No iPhone, adicione o app à tela de início (compartilhar → Adicionar à Tela de Início) e abra por ali para ativar as notificações.",
     "notConfigured": "As notificações ficam disponíveis após entrar com sua conta.",
     "blocked": "As notificações estão bloqueadas. Habilite-as nas configurações do navegador."
+  },
+  "tutorial": {
+    "title": "Tutorial do CuidaJunto",
+    "actions": {
+      "skip": "Pular",
+      "next": "Próximo",
+      "back": "Voltar",
+      "finish": "Começar a usar",
+      "enableNotifications": "Ativar notificações"
+    },
+    "slides": {
+      "welcome": {
+        "title": "Bem-vindo(a) ao CuidaJunto",
+        "description": "O jeito mais leve de cuidar em equipe: organize remédios, plantões e o diário de cuidados em um só lugar."
+      },
+      "medications": {
+        "title": "Remédios sempre em dia",
+        "description": "Cadastre os medicamentos e horários. Qualquer pessoa da equipe pode marcar as doses tomadas, e todos ficam sabendo."
+      },
+      "schedule": {
+        "title": "Escala de plantão",
+        "description": "Organize quem cuida e quando. Assuma um plantão ou veja quem está cuidando agora."
+      },
+      "diary": {
+        "title": "Diário de cuidados",
+        "description": "Registre humor, sono, apetite e observações do dia para toda a equipe acompanhar."
+      },
+      "team": {
+        "title": "Equipe de cuidado",
+        "description": "Convide familiares e cuidadores para o círculo de cuidado e mantenha todos conectados."
+      },
+      "notifications": {
+        "title": "Fique por dentro de tudo",
+        "description": "Ative as notificações para receber lembretes de remédios e alertas de SOS direto no seu celular."
+      }
+    }
   },
   "common": {
     "comingSoon": "Em breve",

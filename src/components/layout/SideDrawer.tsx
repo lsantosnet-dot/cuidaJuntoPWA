@@ -4,6 +4,7 @@ import { CARE_NAV, ACCOUNT_NAV, type NavItem } from '@/config/navigation'
 import { Icon, IconButton } from '@/components/ui'
 import { UserMenu } from '@/features/auth'
 import { useCareCircle } from '@/features/care-circle'
+import { useTutorial } from '@/features/tutorial'
 import { LanguageToggle } from './LanguageToggle'
 import { APP_VERSION } from '@/config/appInfo'
 import { cn } from '@/lib/cn'
@@ -39,6 +40,12 @@ function DrawerLink({ item, onNavigate }: { item: NavItem; onNavigate: () => voi
 export function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
   const { t } = useTranslation()
   const { activeCircle } = useCareCircle()
+  const { openTutorial } = useTutorial()
+
+  const handleOpenTutorial = () => {
+    onClose()
+    openTutorial()
+  }
 
   return (
     <>
@@ -88,6 +95,15 @@ export function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
             {ACCOUNT_NAV.map((item) => (
               <DrawerLink key={item.path} item={item} onNavigate={onClose} />
             ))}
+            <button
+              type="button"
+              onClick={handleOpenTutorial}
+              className="flex min-h-touch items-center gap-3 rounded-card px-3 text-left text-base font-semibold text-content transition-colors hover:bg-surface-container"
+            >
+              <Icon name="info" size={22} />
+              <span className="flex-1">{t('drawer.tutorial')}</span>
+              <Icon name="chevronRight" size={18} />
+            </button>
           </div>
         </nav>
 
