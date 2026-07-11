@@ -128,7 +128,9 @@
     "emptyDescription": "Add medications and times to track today's doses.",
     "deleteLabel": "Delete medication",
     "deleteTitle": "Delete medication",
-    "deleteDescription": "This will remove the medication and its whole dose history. This can't be undone."
+    "deleteDescription": "This will remove the medication and its whole dose history. This can't be undone.",
+    "expandLabel": "View dose details",
+    "collapseLabel": "Close dose details"
   },
   "diary": {
     "add": "New entry",
@@ -215,6 +217,8 @@
     "deleteLabel": "Delete record",
     "deleteTitle": "Delete record",
     "deleteDescription": "This medical record will be permanently deleted.",
+    "expandLabel": "View record details",
+    "collapseLabel": "Close record details",
     "category": {
       "exam": "Exam",
       "appointment": "Appointment",

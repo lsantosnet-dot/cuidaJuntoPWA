@@ -128,7 +128,9 @@
     "emptyDescription": "Adicione os medicamentos e horários para acompanhar as doses do dia.",
     "deleteLabel": "Excluir remédio",
     "deleteTitle": "Excluir remédio",
-    "deleteDescription": "Isto removerá o remédio e todo o seu histórico de doses. Esta ação não pode ser desfeita."
+    "deleteDescription": "Isto removerá o remédio e todo o seu histórico de doses. Esta ação não pode ser desfeita.",
+    "expandLabel": "Ver detalhes da dose",
+    "collapseLabel": "Fechar detalhes da dose"
   },
   "diary": {
     "add": "Novo registro",
@@ -215,6 +217,8 @@
     "deleteLabel": "Excluir registro",
     "deleteTitle": "Excluir registro",
     "deleteDescription": "Este registro do histórico médico será excluído permanentemente.",
+    "expandLabel": "Ver detalhes do registro",
+    "collapseLabel": "Fechar detalhes do registro",
     "category": {
       "exam": "Exame",
       "appointment": "Consulta",
