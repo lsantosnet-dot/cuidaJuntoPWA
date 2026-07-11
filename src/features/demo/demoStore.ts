@@ -60,9 +60,9 @@ function seed(): DemoState {
       { id: 's2', circle_id: c, caregiver_id: 'u-carlos', caregiver_name: 'Carlos (filho)', starts_at: todayAtTime('19:00'), ends_at: null, status: 'scheduled', notes: 'Plantão noturno', created_at: todayAtTime('07:00') },
     ],
     members: [
-      { id: 'mb1', circle_id: c, user_id: DEMO_USER_ID, role: 'admin', display_name: 'Você', email: null, created_at: new Date().toISOString() },
-      { id: 'mb2', circle_id: c, user_id: 'u-ana', role: 'caregiver', display_name: 'Ana', email: 'ana@exemplo.com', created_at: new Date().toISOString() },
-      { id: 'mb3', circle_id: c, user_id: 'u-carlos', role: 'family', display_name: 'Carlos', email: 'carlos@exemplo.com', created_at: new Date().toISOString() },
+      { id: 'mb1', circle_id: c, user_id: DEMO_USER_ID, role: 'admin', display_name: 'Você', email: null, avatar_url: null, created_at: new Date().toISOString() },
+      { id: 'mb2', circle_id: c, user_id: 'u-ana', role: 'caregiver', display_name: 'Ana', email: 'ana@exemplo.com', avatar_url: null, created_at: new Date().toISOString() },
+      { id: 'mb3', circle_id: c, user_id: 'u-carlos', role: 'family', display_name: 'Carlos', email: 'carlos@exemplo.com', avatar_url: null, created_at: new Date().toISOString() },
     ],
     invites: [
       { id: 'i1', circle_id: c, email: 'maria@exemplo.com', role: 'family', status: 'pending', invited_by: DEMO_USER_ID, token: 'demo-invite-token', created_at: new Date().toISOString() },

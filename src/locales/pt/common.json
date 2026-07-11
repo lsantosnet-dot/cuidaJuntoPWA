@@ -199,6 +199,9 @@
     "removeLabel": "Remover membro",
     "removeTitle": "Remover membro",
     "removeDescription": "{{name}} perderá o acesso a este círculo de cuidado.",
+    "you": "Você",
+    "unnamed": "Membro sem nome",
+    "memberSince": "Membro desde {{date}}",
     "role": {
       "admin": "Administrador",
       "family": "Familiar",

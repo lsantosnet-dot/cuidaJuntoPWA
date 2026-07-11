@@ -31,3 +31,21 @@ export async function createCareCircle(
   if (error) throw error
   return data as string
 }
+
+/**
+ * Backfills/refreshes the caller's own display_name, email and avatar_url on
+ * every membership row they hold. `create_care_circle` and `accept_invite`
+ * never capture these fields, so this keeps them in sync with the signed-in
+ * profile (see `sync_member_profile` RPC, SECURITY DEFINER — see supabase/migrations).
+ */
+export async function syncMemberProfile(
+  supabase: AppSupabaseClient,
+  profile: { displayName: string | null; email: string | null; avatarUrl: string | null },
+): Promise<void> {
+  const { error } = await supabase.rpc('sync_member_profile', {
+    p_display_name: profile.displayName,
+    p_email: profile.email,
+    p_avatar_url: profile.avatarUrl,
+  })
+  if (error) throw error
+}
