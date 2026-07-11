@@ -10,21 +10,18 @@ export interface NavItem {
   icon: IconName
 }
 
-/**
- * Primary destinations shown in the bottom navigation bar.
- * Kept to 4 for a calm, uncluttered mobile experience.
- */
+/** Primary destinations shown in the bottom navigation bar. */
 export const PRIMARY_NAV: NavItem[] = [
   { path: ROUTES.home, labelKey: 'nav.home', icon: 'home' },
   { path: ROUTES.schedule, labelKey: 'nav.schedule', icon: 'calendar' },
   { path: ROUTES.medications, labelKey: 'nav.medications', icon: 'pill' },
   { path: ROUTES.diary, labelKey: 'nav.diary', icon: 'book' },
+  { path: ROUTES.costs, labelKey: 'nav.costs', icon: 'wallet' },
 ]
 
 /** Secondary destinations shown in the side drawer, grouped by section. */
 export const CARE_NAV: NavItem[] = [
   { path: ROUTES.team, labelKey: 'nav.team', icon: 'users' },
-  { path: ROUTES.costs, labelKey: 'nav.costs', icon: 'wallet' },
   { path: ROUTES.history, labelKey: 'nav.history', icon: 'history' },
   { path: ROUTES.profile, labelKey: 'nav.profile', icon: 'user' },
 ]
