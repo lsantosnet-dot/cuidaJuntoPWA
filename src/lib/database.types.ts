@@ -20,6 +20,7 @@ export type ShiftStatus = 'scheduled' | 'active' | 'ended'
 export type InviteStatus = 'pending' | 'accepted' | 'revoked'
 export type CostCategory = 'medication' | 'diaper' | 'caregiver' | 'other'
 export type CostSplitType = 'equal' | 'custom'
+export type RoutineType = 'bath' | 'meal' | 'hydration' | 'other'
 
 interface Table<Row, Insert, Update> {
   Row: Row
@@ -176,6 +177,28 @@ export type CostSettlementRow = {
   created_at: string
 }
 
+export type RoutineItemRow = {
+  id: string
+  circle_id: string
+  type: RoutineType
+  name: string
+  target_count_per_day: number
+  notes: string | null
+  active: boolean
+  created_at: string
+}
+
+export type RoutineLogRow = {
+  id: string
+  circle_id: string
+  routine_item_id: string
+  log_date: string
+  completed_at: string
+  completed_by: string
+  completed_by_name: string | null
+  created_at: string
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -192,6 +215,8 @@ export interface Database {
       cost_entries: Table<CostEntryRow, Partial<CostEntryRow> & { circle_id: string; description: string; amount_cents: number; paid_by: string; created_by: string }, Partial<CostEntryRow>>
       cost_shares: Table<CostShareRow, Partial<CostShareRow> & { cost_entry_id: string; circle_id: string; user_id: string; share_cents: number }, Partial<CostShareRow>>
       cost_settlements: Table<CostSettlementRow, Partial<CostSettlementRow> & { circle_id: string; from_user_id: string; to_user_id: string; amount_cents: number; created_by: string }, Partial<CostSettlementRow>>
+      routine_items: Table<RoutineItemRow, Partial<RoutineItemRow> & { circle_id: string; name: string }, Partial<RoutineItemRow>>
+      routine_logs: Table<RoutineLogRow, Partial<RoutineLogRow> & { circle_id: string; routine_item_id: string; completed_by: string }, Partial<RoutineLogRow>>
     }
     Views: Record<never, never>
     Functions: {

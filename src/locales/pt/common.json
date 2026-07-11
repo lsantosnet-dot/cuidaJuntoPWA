@@ -5,8 +5,9 @@
   },
   "nav": {
     "home": "Início",
-    "schedule": "Escala",
+    "schedule": "Revezamento",
     "medications": "Remédios",
+    "routine": "Rotina",
     "diary": "Diário",
     "circles": "Meus Círculos",
     "team": "Equipe",
@@ -200,6 +201,33 @@
       "high": "Muito"
     }
   },
+  "routine": {
+    "add": "Adicionar",
+    "todayProgress": "{{done}} de {{total}} concluídos hoje",
+    "markDone": "Marcar feito",
+    "undo": "Voltar para não feito",
+    "increment": "Adicionar",
+    "decrement": "Remover",
+    "progress": "{{done}} de {{target}}",
+    "target_one": "{{count}}x ao dia",
+    "target_other": "{{count}}x ao dia",
+    "addTitle": "Novo item de rotina",
+    "fieldName": "Nome",
+    "fieldType": "Tipo",
+    "fieldTarget": "Quantas vezes por dia",
+    "targetHint": "Metas de 1 mostram um botão único; a partir de 5, um contador.",
+    "type": {
+      "bath": "Banho",
+      "meal": "Alimentação",
+      "hydration": "Hidratação",
+      "other": "Outro"
+    },
+    "emptyTitle": "Nenhum item de rotina",
+    "emptyDescription": "Adicione banho, alimentação, hidratação ou outros cuidados para acompanhar o dia.",
+    "deleteLabel": "Remover item",
+    "deleteTitle": "Remover item de rotina",
+    "deleteDescription": "O item sairá da lista, mas o histórico de conclusões é mantido."
+  },
   "shifts": {
     "add": "Agendar plantão",
     "addTitle": "Agendar plantão",
@@ -326,12 +354,16 @@
       "subtitle": "Visão geral do cuidado de hoje."
     },
     "schedule": {
-      "title": "Escala de plantão",
+      "title": "Revezamento",
       "subtitle": "Quem cuida e quando."
     },
     "medications": {
       "title": "Remédios do dia",
       "subtitle": "Doses agendadas e confirmadas."
+    },
+    "routine": {
+      "title": "Rotina de hoje",
+      "subtitle": "Banho, alimentação, hidratação e mais."
     },
     "diary": {
       "title": "Diário de cuidados",

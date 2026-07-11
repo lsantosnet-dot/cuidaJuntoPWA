@@ -8,6 +8,7 @@ import { RouteFallback } from './RouteFallback'
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'))
 const SchedulePage = lazy(() => import('@/pages/SchedulePage'))
 const MedicationsPage = lazy(() => import('@/pages/MedicationsPage'))
+const RoutinePage = lazy(() => import('@/pages/RoutinePage'))
 const DiaryPage = lazy(() => import('@/pages/DiaryPage'))
 const CirclesPage = lazy(() => import('@/pages/CirclesPage'))
 const TeamPage = lazy(() => import('@/pages/TeamPage'))
@@ -53,6 +54,14 @@ export function AppRouter() {
             element={
               <Suspense fallback={<RouteFallback />}>
                 <MedicationsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.routine}
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <RoutinePage />
               </Suspense>
             }
           />

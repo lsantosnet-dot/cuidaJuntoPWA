@@ -5,8 +5,9 @@
   },
   "nav": {
     "home": "Home",
-    "schedule": "Schedule",
+    "schedule": "Rotation",
     "medications": "Meds",
+    "routine": "Routine",
     "diary": "Diary",
     "circles": "My Circles",
     "team": "Team",
@@ -200,6 +201,33 @@
       "high": "High"
     }
   },
+  "routine": {
+    "add": "Add",
+    "todayProgress": "{{done}} of {{total}} done today",
+    "markDone": "Mark done",
+    "undo": "Undo",
+    "increment": "Add",
+    "decrement": "Remove",
+    "progress": "{{done}} of {{target}}",
+    "target_one": "{{count}}x a day",
+    "target_other": "{{count}}x a day",
+    "addTitle": "New routine item",
+    "fieldName": "Name",
+    "fieldType": "Type",
+    "fieldTarget": "How many times a day",
+    "targetHint": "A target of 1 shows a single button; 5 or more shows a counter.",
+    "type": {
+      "bath": "Bath",
+      "meal": "Meal",
+      "hydration": "Hydration",
+      "other": "Other"
+    },
+    "emptyTitle": "No routine items yet",
+    "emptyDescription": "Add bathing, meals, hydration or other care items to track the day.",
+    "deleteLabel": "Remove item",
+    "deleteTitle": "Remove routine item",
+    "deleteDescription": "The item will leave the list, but its completion history is kept."
+  },
   "shifts": {
     "add": "Schedule shift",
     "addTitle": "Schedule shift",
@@ -326,12 +354,16 @@
       "subtitle": "Today's care at a glance."
     },
     "schedule": {
-      "title": "Care schedule",
+      "title": "Rotation",
       "subtitle": "Who cares, and when."
     },
     "medications": {
       "title": "Today's meds",
       "subtitle": "Scheduled and confirmed doses."
+    },
+    "routine": {
+      "title": "Today's routine",
+      "subtitle": "Bathing, meals, hydration and more."
     },
     "diary": {
       "title": "Care diary",

@@ -6,6 +6,7 @@ export const ROUTES = {
   home: '/',
   schedule: '/schedule',
   medications: '/medications',
+  routine: '/routine',
   diary: '/diary',
   circles: '/circles',
   team: '/team',

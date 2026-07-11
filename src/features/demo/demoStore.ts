@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react'
-import { todayAtTime } from '@/lib/datetime'
+import { todayAtTime, todayISODate } from '@/lib/datetime'
 import type {
   CareRecipientRow,
   MedicationRow,
@@ -12,6 +12,8 @@ import type {
   CostEntryRow,
   CostShareRow,
   CostSettlementRow,
+  RoutineItemRow,
+  RoutineLogRow,
 } from '@/lib/database.types'
 
 /** Fixed ids so demo relations line up. */
@@ -30,6 +32,8 @@ export interface DemoState {
   costEntries: CostEntryRow[]
   costShares: CostShareRow[]
   costSettlements: CostSettlementRow[]
+  routineItems: RoutineItemRow[]
+  routineLogs: RoutineLogRow[]
 }
 
 const c = DEMO_CIRCLE_ID
@@ -94,6 +98,15 @@ function seed(): DemoState {
       { id: 'cs7', cost_entry_id: 'ce3', circle_id: c, user_id: 'u-carlos', user_name: 'Carlos', share_cents: 7500, created_at: todayAtTime('11:00') },
     ],
     costSettlements: [],
+    routineItems: [
+      { id: 'ri1', circle_id: c, type: 'bath', name: 'Banho', target_count_per_day: 1, notes: null, active: true, created_at: new Date().toISOString() },
+      { id: 'ri2', circle_id: c, type: 'meal', name: 'Almoço', target_count_per_day: 1, notes: null, active: true, created_at: new Date().toISOString() },
+      { id: 'ri3', circle_id: c, type: 'hydration', name: 'Hidratação', target_count_per_day: 3, notes: null, active: true, created_at: new Date().toISOString() },
+    ],
+    routineLogs: [
+      { id: 'rl1', circle_id: c, routine_item_id: 'ri1', log_date: todayISODate(), completed_at: todayAtTime('08:15'), completed_by: DEMO_USER_ID, completed_by_name: 'Você', created_at: todayAtTime('08:15') },
+      { id: 'rl2', circle_id: c, routine_item_id: 'ri3', log_date: todayISODate(), completed_at: todayAtTime('09:00'), completed_by: DEMO_USER_ID, completed_by_name: 'Você', created_at: todayAtTime('09:00') },
+    ],
   }
 }
 

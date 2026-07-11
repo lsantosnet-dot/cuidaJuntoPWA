@@ -98,6 +98,31 @@ const ICON_PATHS = {
       <circle cx="16.5" cy="14.2" r="1.1" />
     </>
   ),
+  checklist: (
+    <>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+      <path d="M7 8.2l1.3 1.3L11 6.8" />
+      <path d="M13.5 8h4" />
+      <path d="M7 13.2l1.3 1.3L11 11.8" />
+      <path d="M13.5 13h4" />
+    </>
+  ),
+  bath: (
+    <>
+      <path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z" />
+      <path d="M4 12V8.5A2.5 2.5 0 0 1 6.5 6c1 0 1.8.5 2.2 1.3" />
+      <path d="M4 19v1.5M18 19v1.5" />
+    </>
+  ),
+  meal: (
+    <>
+      <path d="M4 12.5h16a8 8 0 0 1-8 8 8 8 0 0 1-8-8z" />
+      <path d="M8 12.5V10M12 12.5V8M16 12.5v3" />
+    </>
+  ),
+  droplet: <path d="M12 3s6 6.5 6 11a6 6 0 1 1-12 0c0-4.5 6-11 6-11z" />,
+  minus: <path d="M5 12h14" />,
+  circle: <circle cx="12" cy="12" r="8.5" />,
 } as const
 
 export type IconName = keyof typeof ICON_PATHS
