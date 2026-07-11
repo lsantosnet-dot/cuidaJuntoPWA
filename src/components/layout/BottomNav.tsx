@@ -4,7 +4,7 @@ import { PRIMARY_NAV } from '@/config/navigation'
 import { Icon } from '@/components/ui'
 import { cn } from '@/lib/cn'
 
-/** Bottom navigation bar with the 4 primary destinations. */
+/** Bottom navigation bar with the primary destinations. */
 export function BottomNav() {
   const { t } = useTranslation()
 

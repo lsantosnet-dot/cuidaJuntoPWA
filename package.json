@@ -1,7 +1,7 @@
 {
   "name": "cuidajunto-pwa",
   "private": true,
-  "version": "1.0.16",
+  "version": "1.0.17",
   "type": "module",
   "description": "CuidaJunto — PWA de cuidado compartilhado para famílias e cuidadores",
   "scripts": {
