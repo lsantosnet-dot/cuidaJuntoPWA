@@ -29,6 +29,12 @@
     "pt": "Português",
     "en": "English"
   },
+  "theme": {
+    "label": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
   "account": {
     "signOut": "Sign out",
     "demo": "Demo"

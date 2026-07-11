@@ -16,6 +16,22 @@
       rel="stylesheet"
     />
     <title>CuidaJunto</title>
+    <script>
+      // Apply the saved theme before first paint to avoid a light/dark flash.
+      // Kept inline and tiny on purpose; the React hook takes over after mount.
+      ;(function () {
+        try {
+          var pref = localStorage.getItem('cuidajunto.theme')
+          var dark =
+            pref === 'dark' ||
+            ((pref === null || pref === 'system') &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches)
+          document.documentElement.classList.toggle('dark', dark)
+        } catch (e) {
+          /* first paint falls back to light */
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

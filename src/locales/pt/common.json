@@ -29,6 +29,12 @@
     "pt": "Português",
     "en": "English"
   },
+  "theme": {
+    "label": "Tema",
+    "system": "Sistema",
+    "light": "Claro",
+    "dark": "Escuro"
+  },
   "account": {
     "signOut": "Sair",
     "demo": "Demo"

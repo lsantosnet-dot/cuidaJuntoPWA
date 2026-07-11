@@ -15,7 +15,11 @@ export function Card({ elevated = true, className, children, ...props }: CardPro
     <div
       className={cn(
         'rounded-card bg-surface-lowest p-4',
-        elevated ? 'shadow-card' : 'border border-outline-variant',
+        // Shadows are invisible on dark surfaces, so a hairline ring keeps the
+        // card readable as an elevated block in dark mode.
+        elevated
+          ? 'shadow-card dark:ring-1 dark:ring-white/10'
+          : 'border border-outline-variant',
         className,
       )}
       {...props}

@@ -1,5 +1,5 @@
 import type { AppSupabaseClient } from '@/lib/supabase'
-import { todayISODate } from '@/lib/datetime'
+import { localDayRangeISO } from '@/lib/datetime'
 import type { MedicationRow, MedicationLogRow, NewMedication } from './types'
 
 export async function fetchMedications(
@@ -19,8 +19,9 @@ export async function fetchTodayLogs(
   supabase: AppSupabaseClient,
   circleId: string,
 ): Promise<MedicationLogRow[]> {
-  const start = `${todayISODate()}T00:00:00`
-  const end = `${todayISODate()}T23:59:59`
+  // Local-day bounds as real UTC instants — naive strings would be read as UTC
+  // and evening doses (e.g. 21:56 in UTC-3) would fall outside the window.
+  const { start, end } = localDayRangeISO()
   const { data, error } = await supabase
     .from('medication_logs')
     .select('*')

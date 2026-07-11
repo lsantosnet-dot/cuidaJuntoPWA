@@ -40,6 +40,19 @@ export function todayISODate(): string {
   return `${d.getFullYear()}-${m}-${day}`
 }
 
+/**
+ * Start/end of the LOCAL day as UTC instants (ISO). Use these for timestamptz
+ * range queries: naive strings like "2026-07-10T00:00:00" are read as UTC by
+ * Postgres and shift the window by the timezone offset, dropping evening doses.
+ */
+export function localDayRangeISO(): { start: string; end: string } {
+  const start = new Date()
+  start.setHours(0, 0, 0, 0)
+  const end = new Date()
+  end.setHours(23, 59, 59, 999)
+  return { start: start.toISOString(), end: end.toISOString() }
+}
+
 /** Combines today's date with an "HH:mm" time into an ISO timestamp. */
 export function todayAtTime(time: string): string {
   const [h, m] = time.split(':').map(Number)

@@ -31,7 +31,7 @@ export function LanguageToggle() {
                 'min-h-touch flex-1 rounded-pill px-4 text-base font-semibold transition-colors',
                 active
                   ? 'bg-primary text-primary-on'
-                  : 'text-content-variant hover:bg-surface-container-high',
+                  : 'text-content-variant hover:bg-surface-high',
               )}
             >
               {t(`language.${lang}`)}

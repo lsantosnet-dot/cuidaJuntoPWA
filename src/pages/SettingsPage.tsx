@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PageHeader, Card } from '@/components/ui'
 import { LanguageToggle } from '@/components/layout/LanguageToggle'
+import { ThemeToggle } from '@/components/layout/ThemeToggle'
 import { CircleSwitcher } from '@/features/care-circle'
 import { NotificationsCard } from '@/features/notifications'
 
@@ -24,6 +25,10 @@ export default function SettingsPage() {
 
       <Section title={t('circles.section')}>
         <CircleSwitcher />
+      </Section>
+
+      <Section title={t('theme.label')}>
+        <ThemeToggle />
       </Section>
 
       <Section title={t('notifications.section')}>

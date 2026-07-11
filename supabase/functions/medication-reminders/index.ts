@@ -47,6 +47,21 @@ function clockInTz(iso: string, tz: string): string {
   return `${parts.hour}:${parts.minute}`
 }
 
+/** Local YYYY-MM-DD of an ISO timestamp, in the reminder timezone. */
+function dateInTz(iso: string, tz: string): string {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat('en-CA', {
+      timeZone: tz,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    })
+      .formatToParts(new Date(iso))
+      .map((p) => [p.type, p.value]),
+  ) as Record<string, string>
+  return `${parts.year}-${parts.month}-${parts.day}`
+}
+
 Deno.serve(async (req) => {
   const secret = Deno.env.get('CRON_SECRET')
   if (secret && req.headers.get('x-cron-secret') !== secret) {
@@ -72,16 +87,21 @@ Deno.serve(async (req) => {
       })
       if (dueTimes.length === 0) continue
 
+      // Fetch a generous window (naive "date T00:00" strings would be read as
+      // UTC and shift the day), then match logs by TZ-local date + clock.
+      const since = new Date(Date.now() - 26 * 3600 * 1000).toISOString()
       const { data: logs } = await admin
         .from('medication_logs')
         .select('status, scheduled_for')
         .eq('medication_id', med.id)
-        .gte('scheduled_for', `${date}T00:00:00`)
-        .lte('scheduled_for', `${date}T23:59:59`)
+        .gte('scheduled_for', since)
 
       for (const tm of dueTimes) {
         const alreadyTaken = (logs ?? []).some(
-          (l) => l.status === 'taken' && clockInTz(l.scheduled_for, REMINDER_TZ) === tm,
+          (l) =>
+            l.status === 'taken' &&
+            dateInTz(l.scheduled_for, REMINDER_TZ) === date &&
+            clockInTz(l.scheduled_for, REMINDER_TZ) === tm,
         )
         if (alreadyTaken) continue
 

@@ -9,8 +9,9 @@
  * under `.dark`.
  */
 :root {
-  /* Signals both themes are supported, so browsers don't force-darken. */
-  color-scheme: light dark;
+  /* Declaring a color scheme stops browsers from force-darkening the page.
+     The `.dark` class (set pre-paint from the user's preference) switches it. */
+  color-scheme: light;
 
   --color-primary: 0 83 91;
   --color-primary-container: 0 109 119;
@@ -51,44 +52,46 @@
 }
 
 /*
- * Dark theme. Cards/inputs use `surface-container-lowest`, so in dark it must be
- * LIGHTER than the page `surface` to still read as "elevated" (inverse of light).
+ * Dark theme — activated by the `.dark` class on <html> (user-selectable in
+ * Settings: light / dark / system). Cards use `surface-container-lowest`, so in
+ * dark it must be LIGHTER than the page `surface` to read as "elevated";
+ * shadows are invisible on dark, so components add a subtle ring instead.
  */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: 130 211 222;
-    --color-primary-container: 0 79 86;
-    --color-on-primary: 0 54 61;
-    --color-on-primary-container: 159 240 251;
+:root.dark {
+  color-scheme: dark;
 
-    --color-secondary: 176 206 180;
-    --color-secondary-container: 51 77 56;
-    --color-on-secondary: 29 53 33;
-    --color-on-secondary-container: 204 234 207;
+  --color-primary: 132 213 224;
+  --color-primary-container: 0 79 86;
+  --color-on-primary: 0 46 52;
+  --color-on-primary-container: 176 242 251;
 
-    --color-tertiary: 255 181 154;
-    --color-tertiary-container: 111 55 32;
-    --color-on-tertiary: 84 33 5;
-    --color-on-tertiary-container: 255 219 206;
+  --color-secondary: 181 211 185;
+  --color-secondary-container: 54 80 59;
+  --color-on-secondary: 26 48 30;
+  --color-on-secondary-container: 209 237 212;
 
-    --color-error: 255 180 171;
-    --color-error-container: 147 0 10;
-    --color-on-error: 105 0 5;
-    --color-on-error-container: 255 218 214;
+  --color-tertiary: 255 186 160;
+  --color-tertiary-container: 115 58 34;
+  --color-on-tertiary: 80 30 4;
+  --color-on-tertiary-container: 255 224 212;
 
-    --color-surface: 15 20 20;
-    --color-surface-container-lowest: 32 38 38;
-    --color-surface-container-low: 26 31 31;
-    --color-surface-container: 38 44 44;
-    --color-surface-container-high: 47 53 53;
-    --color-surface-container-highest: 57 63 63;
+  --color-error: 255 180 171;
+  --color-error-container: 147 0 10;
+  --color-on-error: 105 0 5;
+  --color-on-error-container: 255 218 214;
 
-    --color-on-surface: 224 227 227;
-    --color-on-surface-variant: 190 200 201;
+  --color-surface: 15 20 20;
+  --color-surface-container-lowest: 39 46 46;
+  --color-surface-container-low: 25 31 31;
+  --color-surface-container: 47 54 54;
+  --color-surface-container-high: 58 65 65;
+  --color-surface-container-highest: 68 75 75;
 
-    --color-outline: 137 147 146;
-    --color-outline-variant: 62 74 74;
-  }
+  --color-on-surface: 235 238 238;
+  --color-on-surface-variant: 203 212 213;
+
+  --color-outline: 152 162 161;
+  --color-outline-variant: 76 88 88;
 }
 
 @layer base {

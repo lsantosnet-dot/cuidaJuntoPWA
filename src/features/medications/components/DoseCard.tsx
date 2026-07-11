@@ -19,7 +19,7 @@ export function DoseCard({ dose, onMarkTaken, onUndo, busy }: DoseCardProps) {
   const taken = dose.status === 'taken'
 
   return (
-    <div className="flex overflow-hidden rounded-card bg-surface-lowest shadow-card">
+    <div className="flex overflow-hidden rounded-card bg-surface-lowest shadow-card dark:ring-1 dark:ring-white/10">
       <span className={cn('w-1.5 shrink-0', taken ? 'bg-secondary' : 'bg-tertiary')} aria-hidden="true" />
       <div className="flex flex-1 items-center gap-3 p-4">
         <div className="flex flex-col items-center">
@@ -44,7 +44,7 @@ export function DoseCard({ dose, onMarkTaken, onUndo, busy }: DoseCardProps) {
           )}
         </div>
         {taken ? (
-          <Button variant="ghost" size="md" onClick={() => onUndo(dose)} disabled={busy}>
+          <Button variant="outline" size="md" onClick={() => onUndo(dose)} disabled={busy}>
             {t('medications.undo')}
           </Button>
         ) : (
