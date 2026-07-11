@@ -3,7 +3,7 @@ import { useAuth } from '@/features/auth'
 import { useSupabaseClient } from '@/hooks/useSupabaseClient'
 import { DEMO_CIRCLE_ID, DEMO_USER_ID } from '@/features/demo/demoStore'
 import { CareCircleContext } from './CareCircleContext'
-import { fetchMemberships, createCareCircle } from './api'
+import { fetchMemberships, createCareCircle, syncMemberProfile } from './api'
 import type { MembershipWithCircle, CareCircleState } from './types'
 
 // Active-circle choice is per user (not per browser), so switching Clerk
@@ -19,6 +19,7 @@ const DEMO_MEMBERSHIP: MembershipWithCircle = {
   role: 'admin',
   display_name: 'Você',
   email: null,
+  avatar_url: null,
   created_at: new Date().toISOString(),
   care_circles: {
     id: DEMO_CIRCLE_ID,
@@ -56,6 +57,13 @@ export function CareCircleProvider({ children }: { children: ReactNode }) {
     setIsLoading(true)
     setError(null)
     try {
+      if (user) {
+        await syncMemberProfile(supabase, {
+          displayName: user.name,
+          email: user.email,
+          avatarUrl: user.imageUrl,
+        })
+      }
       const rows = await fetchMemberships(supabase)
       setMemberships(rows)
       // Keep a valid active circle: honor stored choice, else pick the first.
@@ -71,7 +79,7 @@ export function CareCircleProvider({ children }: { children: ReactNode }) {
     } finally {
       setIsLoading(false)
     }
-  }, [supabase, isEnabled, key])
+  }, [supabase, isEnabled, key, user])
 
   const createCircle = useCallback(
     async (input: { name: string; recipientName?: string }) => {

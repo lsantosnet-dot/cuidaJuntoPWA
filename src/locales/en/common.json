@@ -199,6 +199,11 @@
     "removeLabel": "Remove member",
     "removeTitle": "Remove member",
     "removeDescription": "{{name}} will lose access to this care circle.",
+    "you": "You",
+    "unnamed": "Unnamed member",
+    "memberSince": "Member since {{date}}",
+    "expandLabel": "View member details",
+    "collapseLabel": "Hide member details",
     "role": {
       "admin": "Admin",
       "family": "Family",

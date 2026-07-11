@@ -40,6 +40,7 @@ export type MembershipRow = {
   role: MembershipRole
   display_name: string | null
   email: string | null
+  avatar_url: string | null
   created_at: string
 }
 
@@ -165,6 +166,10 @@ export interface Database {
       accept_invite: {
         Args: { invite_token: string }
         Returns: string
+      }
+      sync_member_profile: {
+        Args: { p_display_name: string | null; p_email: string | null; p_avatar_url: string | null }
+        Returns: void
       }
     }
     Enums: Record<never, never>
