@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Modal, Button, FormField, TextField, TextArea } from '@/components/ui'
+import { Modal, Button, FormField, TextField, TextArea, IconButton, Icon } from '@/components/ui'
 import type { NewMedication } from '../types'
 
 interface AddMedicationFormProps {
@@ -9,30 +9,33 @@ interface AddMedicationFormProps {
   onSubmit: (input: NewMedication) => Promise<void>
 }
 
-function parseTimes(raw: string): string[] {
-  return raw
-    .split(',')
-    .map((t) => t.trim())
-    .filter((t) => /^\d{1,2}:\d{2}$/.test(t))
-    .map((t) => t.padStart(5, '0'))
-}
-
 export function AddMedicationForm({ isOpen, onClose, onSubmit }: AddMedicationFormProps) {
   const { t } = useTranslation()
   const [name, setName] = useState('')
   const [dosage, setDosage] = useState('')
-  const [times, setTimes] = useState('')
+  const [times, setTimes] = useState<string[]>([''])
   const [instructions, setInstructions] = useState('')
   const [saving, setSaving] = useState(false)
 
   const reset = () => {
     setName('')
     setDosage('')
-    setTimes('')
+    setTimes([''])
     setInstructions('')
   }
 
-  const parsedTimes = parseTimes(times)
+  const updateTime = (index: number, value: string) => {
+    setTimes(times.map((t, i) => (i === index ? value : t)))
+  }
+
+  const addTime = () => setTimes([...times, ''])
+
+  const removeTime = (index: number) => {
+    const next = times.filter((_, i) => i !== index)
+    setTimes(next.length > 0 ? next : [''])
+  }
+
+  const parsedTimes = times.map((t) => t.trim()).filter((t) => /^\d{2}:\d{2}$/.test(t))
   const canSave = name.trim().length > 0 && parsedTimes.length > 0 && !saving
 
   const handleSubmit = async (e: FormEvent) => {
@@ -66,16 +69,32 @@ export function AddMedicationForm({ isOpen, onClose, onSubmit }: AddMedicationFo
             />
           )}
         </FormField>
-        <FormField label={t('medications.fieldTimes')} hint={t('medications.timesHint')}>
+        <FormField label={t('medications.fieldTimes')}>
           {(id) => (
-            <TextField
-              id={id}
-              value={times}
-              onChange={(e) => setTimes(e.target.value)}
-              placeholder="08:00, 20:00"
-              inputMode="numeric"
-              required
-            />
+            <div className="flex flex-col gap-2">
+              {times.map((time, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <TextField
+                    id={index === 0 ? id : undefined}
+                    type="time"
+                    value={time}
+                    onChange={(e) => updateTime(index, e.target.value)}
+                    required
+                    className="flex-1"
+                  />
+                  {times.length > 1 && (
+                    <IconButton
+                      label={t('medications.removeTime')}
+                      icon="close"
+                      onClick={() => removeTime(index)}
+                    />
+                  )}
+                </div>
+              ))}
+              <Button type="button" variant="ghost" onClick={addTime} leadingIcon={<Icon name="plus" size={20} />}>
+                {t('medications.addTime')}
+              </Button>
+            </div>
           )}
         </FormField>
         <FormField label={t('medications.fieldInstructions')}>
