@@ -18,6 +18,8 @@ export type Mood = 'great' | 'ok' | 'down' | 'irritated' | 'sleepy'
 export type RecordCategory = 'exam' | 'appointment' | 'document' | 'note'
 export type ShiftStatus = 'scheduled' | 'active' | 'ended'
 export type InviteStatus = 'pending' | 'accepted' | 'revoked'
+export type CostCategory = 'medication' | 'diaper' | 'caregiver' | 'other'
+export type CostSplitType = 'equal' | 'custom'
 
 interface Table<Row, Insert, Update> {
   Row: Row
@@ -134,6 +136,46 @@ export type PushSubscriptionRow = {
   created_at: string
 }
 
+export type CostEntryRow = {
+  id: string
+  circle_id: string
+  description: string
+  category: CostCategory
+  amount_cents: number
+  currency: string
+  expense_date: string
+  paid_by: string
+  paid_by_name: string | null
+  split_type: CostSplitType
+  notes: string | null
+  created_by: string
+  created_at: string
+}
+
+export type CostShareRow = {
+  id: string
+  cost_entry_id: string
+  circle_id: string
+  user_id: string
+  user_name: string | null
+  share_cents: number
+  created_at: string
+}
+
+export type CostSettlementRow = {
+  id: string
+  circle_id: string
+  from_user_id: string
+  from_user_name: string | null
+  to_user_id: string
+  to_user_name: string | null
+  amount_cents: number
+  note: string | null
+  settled_at: string
+  created_by: string
+  created_at: string
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -147,6 +189,9 @@ export interface Database {
       medical_records: Table<MedicalRecordRow, Partial<MedicalRecordRow> & { circle_id: string; title: string }, Partial<MedicalRecordRow>>
       invites: Table<InviteRow, Partial<InviteRow> & { circle_id: string; email: string; invited_by: string }, Partial<InviteRow>>
       push_subscriptions: Table<PushSubscriptionRow, Partial<PushSubscriptionRow> & { user_id: string; endpoint: string; p256dh: string; auth: string }, Partial<PushSubscriptionRow>>
+      cost_entries: Table<CostEntryRow, Partial<CostEntryRow> & { circle_id: string; description: string; amount_cents: number; paid_by: string; created_by: string }, Partial<CostEntryRow>>
+      cost_shares: Table<CostShareRow, Partial<CostShareRow> & { cost_entry_id: string; circle_id: string; user_id: string; share_cents: number }, Partial<CostShareRow>>
+      cost_settlements: Table<CostSettlementRow, Partial<CostSettlementRow> & { circle_id: string; from_user_id: string; to_user_id: string; amount_cents: number; created_by: string }, Partial<CostSettlementRow>>
     }
     Views: Record<never, never>
     Functions: {

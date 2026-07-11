@@ -8,6 +8,7 @@ export const ROUTES = {
   medications: '/medications',
   diary: '/diary',
   team: '/team',
+  costs: '/costs',
   history: '/history',
   profile: '/profile',
   settings: '/settings',

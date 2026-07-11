@@ -9,6 +9,7 @@
     "medications": "Meds",
     "diary": "Diary",
     "team": "Team",
+    "costs": "Costs",
     "history": "History",
     "profile": "Care profile",
     "settings": "Settings"
@@ -247,6 +248,43 @@
       "caregiver": "Caregiver"
     }
   },
+  "costs": {
+    "add": "New expense",
+    "addTitle": "New expense",
+    "fieldDescription": "Description",
+    "fieldCategory": "Category",
+    "fieldAmount": "Amount",
+    "fieldDate": "Date",
+    "fieldPaidBy": "Paid by",
+    "fieldSplit": "How to split",
+    "splitEqual": "Split equally",
+    "splitCustom": "Customize",
+    "fieldParticipants": "Participants",
+    "splitMissing": "{{amount}} short of the total",
+    "splitOver": "{{amount}} over the total",
+    "fieldNotes": "Notes",
+    "paidBy": "Paid by {{name}}",
+    "emptyTitle": "No expenses yet",
+    "emptyDescription": "Log medications, diapers or the hired caregiver to split costs with the team.",
+    "deleteLabel": "Delete expense",
+    "deleteTitle": "Delete expense",
+    "deleteDescription": "This expense and its split between members will be permanently deleted.",
+    "expandLabel": "View expense details",
+    "collapseLabel": "Close expense details",
+    "historySection": "Expenses",
+    "whoOwesWhom": "Who owes whom",
+    "allSettled": "All settled up!",
+    "debtLine": "{{from}} owes {{to}} {{amount}}",
+    "markPaid": "Mark as paid",
+    "settleTitle": "{{from}} paying {{to}}",
+    "confirmSettle": "Confirm payment",
+    "category": {
+      "medication": "Medications",
+      "diaper": "Diapers & hygiene",
+      "caregiver": "Hired caregiver",
+      "other": "Other"
+    }
+  },
   "history": {
     "add": "Add",
     "addTitle": "New medical record",
@@ -302,6 +340,10 @@
     "team": {
       "title": "Care team",
       "subtitle": "Family members and caregivers."
+    },
+    "costs": {
+      "title": "Cost splitting",
+      "subtitle": "Medications, diapers and the hired caregiver."
     },
     "history": {
       "title": "Medical history",

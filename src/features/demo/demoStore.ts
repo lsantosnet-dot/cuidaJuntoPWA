@@ -9,6 +9,9 @@ import type {
   MembershipRow,
   InviteRow,
   MedicalRecordRow,
+  CostEntryRow,
+  CostShareRow,
+  CostSettlementRow,
 } from '@/lib/database.types'
 
 /** Fixed ids so demo relations line up. */
@@ -24,6 +27,9 @@ export interface DemoState {
   members: MembershipRow[]
   invites: InviteRow[]
   records: MedicalRecordRow[]
+  costEntries: CostEntryRow[]
+  costShares: CostShareRow[]
+  costSettlements: CostSettlementRow[]
 }
 
 const c = DEMO_CIRCLE_ID
@@ -71,6 +77,23 @@ function seed(): DemoState {
       { id: 'r1', circle_id: c, title: 'Hemograma completo', category: 'exam', record_date: '2026-06-28', details: 'Resultados dentro do esperado. Glicemia levemente elevada.', attachment_url: null, created_at: new Date().toISOString() },
       { id: 'r2', circle_id: c, title: 'Consulta com cardiologista', category: 'appointment', record_date: '2026-06-15', details: 'Ajuste da dose de Losartana. Retorno em 3 meses.', attachment_url: null, created_at: new Date().toISOString() },
     ],
+    // Diaper split 3 ways, medication and the caregiver's day split between
+    // the two family members — Ana is paid, not one of the debtors.
+    costEntries: [
+      { id: 'ce1', circle_id: c, description: 'Fraldas geriátricas (pacote)', category: 'diaper', amount_cents: 12000, currency: 'BRL', expense_date: '2026-07-08', paid_by: 'u-carlos', paid_by_name: 'Carlos', split_type: 'equal', notes: null, created_by: 'u-carlos', created_at: todayAtTime('09:00') },
+      { id: 'ce2', circle_id: c, description: 'Farmácia — Metformina e Losartana', category: 'medication', amount_cents: 8550, currency: 'BRL', expense_date: '2026-07-09', paid_by: DEMO_USER_ID, paid_by_name: 'Você', split_type: 'equal', notes: null, created_by: DEMO_USER_ID, created_at: todayAtTime('10:00') },
+      { id: 'ce3', circle_id: c, description: 'Diária da cuidadora Ana', category: 'caregiver', amount_cents: 15000, currency: 'BRL', expense_date: '2026-07-10', paid_by: 'u-carlos', paid_by_name: 'Carlos', split_type: 'equal', notes: 'Pago em dinheiro no fim do plantão.', created_by: 'u-carlos', created_at: todayAtTime('11:00') },
+    ],
+    costShares: [
+      { id: 'cs1', cost_entry_id: 'ce1', circle_id: c, user_id: DEMO_USER_ID, user_name: 'Você', share_cents: 4000, created_at: todayAtTime('09:00') },
+      { id: 'cs2', cost_entry_id: 'ce1', circle_id: c, user_id: 'u-ana', user_name: 'Ana', share_cents: 4000, created_at: todayAtTime('09:00') },
+      { id: 'cs3', cost_entry_id: 'ce1', circle_id: c, user_id: 'u-carlos', user_name: 'Carlos', share_cents: 4000, created_at: todayAtTime('09:00') },
+      { id: 'cs4', cost_entry_id: 'ce2', circle_id: c, user_id: DEMO_USER_ID, user_name: 'Você', share_cents: 4275, created_at: todayAtTime('10:00') },
+      { id: 'cs5', cost_entry_id: 'ce2', circle_id: c, user_id: 'u-carlos', user_name: 'Carlos', share_cents: 4275, created_at: todayAtTime('10:00') },
+      { id: 'cs6', cost_entry_id: 'ce3', circle_id: c, user_id: DEMO_USER_ID, user_name: 'Você', share_cents: 7500, created_at: todayAtTime('11:00') },
+      { id: 'cs7', cost_entry_id: 'ce3', circle_id: c, user_id: 'u-carlos', user_name: 'Carlos', share_cents: 7500, created_at: todayAtTime('11:00') },
+    ],
+    costSettlements: [],
   }
 }
 

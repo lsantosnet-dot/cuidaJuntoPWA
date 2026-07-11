@@ -9,6 +9,7 @@
     "medications": "Remédios",
     "diary": "Diário",
     "team": "Equipe",
+    "costs": "Custos",
     "history": "Histórico",
     "profile": "Perfil do idoso",
     "settings": "Configurações"
@@ -247,6 +248,43 @@
       "caregiver": "Cuidador(a)"
     }
   },
+  "costs": {
+    "add": "Nova despesa",
+    "addTitle": "Nova despesa",
+    "fieldDescription": "Descrição",
+    "fieldCategory": "Categoria",
+    "fieldAmount": "Valor",
+    "fieldDate": "Data",
+    "fieldPaidBy": "Quem pagou",
+    "fieldSplit": "Como dividir",
+    "splitEqual": "Dividir igualmente",
+    "splitCustom": "Personalizar",
+    "fieldParticipants": "Participantes",
+    "splitMissing": "Faltam {{amount}} para completar o total",
+    "splitOver": "{{amount}} a mais do que o total",
+    "fieldNotes": "Observações",
+    "paidBy": "Pago por {{name}}",
+    "emptyTitle": "Nenhuma despesa lançada",
+    "emptyDescription": "Registre remédios, fraldas ou o cuidador contratado para dividir os custos com a equipe.",
+    "deleteLabel": "Excluir despesa",
+    "deleteTitle": "Excluir despesa",
+    "deleteDescription": "Esta despesa e sua divisão entre os membros serão excluídas permanentemente.",
+    "expandLabel": "Ver detalhes da despesa",
+    "collapseLabel": "Fechar detalhes da despesa",
+    "historySection": "Despesas",
+    "whoOwesWhom": "Quem deve para quem",
+    "allSettled": "Tudo quitado por aqui!",
+    "debtLine": "{{from}} deve {{amount}} para {{to}}",
+    "markPaid": "Marcar como pago",
+    "settleTitle": "{{from}} pagando {{to}}",
+    "confirmSettle": "Confirmar pagamento",
+    "category": {
+      "medication": "Remédios",
+      "diaper": "Fraldas e higiene",
+      "caregiver": "Cuidador contratado",
+      "other": "Outros"
+    }
+  },
   "history": {
     "add": "Adicionar",
     "addTitle": "Novo registro médico",
@@ -302,6 +340,10 @@
     "team": {
       "title": "Equipe de cuidado",
       "subtitle": "Familiares e cuidadores."
+    },
+    "costs": {
+      "title": "Divisão de custos",
+      "subtitle": "Remédios, fraldas e cuidador contratado."
     },
     "history": {
       "title": "Histórico médico",
