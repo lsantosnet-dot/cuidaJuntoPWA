@@ -56,14 +56,20 @@ export function CareCircleProvider({ children }: { children: ReactNode }) {
     }
     setIsLoading(true)
     setError(null)
-    try {
-      if (user) {
+    if (user) {
+      // Best-effort: never let a profile-sync hiccup (e.g. a pending
+      // migration) block loading the user's real circles below.
+      try {
         await syncMemberProfile(supabase, {
           displayName: user.name,
           email: user.email,
           avatarUrl: user.imageUrl,
         })
+      } catch (err) {
+        console.error('syncMemberProfile failed', err)
       }
+    }
+    try {
       const rows = await fetchMemberships(supabase)
       setMemberships(rows)
       // Keep a valid active circle: honor stored choice, else pick the first.
