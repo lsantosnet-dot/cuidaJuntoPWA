@@ -54,3 +54,11 @@ export async function revokeInvite(supabase: AppSupabaseClient, inviteId: string
     .eq('id', inviteId)
   if (error) throw error
 }
+
+export async function removeMember(
+  supabase: AppSupabaseClient,
+  membershipId: string,
+): Promise<void> {
+  const { error } = await supabase.from('memberships').delete().eq('id', membershipId)
+  if (error) throw error
+}

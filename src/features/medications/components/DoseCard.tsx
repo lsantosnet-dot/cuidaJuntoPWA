@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Button, Icon } from '@/components/ui'
+import { Button, Icon, IconButton } from '@/components/ui'
 import { cn } from '@/lib/cn'
 import { useLanguage } from '@/hooks/useLanguage'
 import { formatTime } from '@/lib/datetime'
@@ -9,11 +9,13 @@ interface DoseCardProps {
   dose: Dose
   onMarkTaken: (dose: Dose) => void
   onUndo: (dose: Dose) => void
+  /** Omit to hide the delete action (e.g. dashboard preview tiles). */
+  onDelete?: (dose: Dose) => void
   busy?: boolean
 }
 
 /** Medication dose card with a left status strip (green taken / amber pending). */
-export function DoseCard({ dose, onMarkTaken, onUndo, busy }: DoseCardProps) {
+export function DoseCard({ dose, onMarkTaken, onUndo, onDelete, busy }: DoseCardProps) {
   const { t } = useTranslation()
   const { current } = useLanguage()
   const taken = dose.status === 'taken'
@@ -43,20 +45,32 @@ export function DoseCard({ dose, onMarkTaken, onUndo, busy }: DoseCardProps) {
             )
           )}
         </div>
-        {taken ? (
-          <Button variant="outline" size="md" onClick={() => onUndo(dose)} disabled={busy}>
-            {t('medications.undo')}
-          </Button>
-        ) : (
-          <Button
-            size="md"
-            onClick={() => onMarkTaken(dose)}
-            disabled={busy}
-            leadingIcon={<Icon name="check" size={20} />}
-          >
-            {t('medications.markTaken')}
-          </Button>
-        )}
+        <div className="flex shrink-0 items-center gap-1">
+          {taken ? (
+            <Button variant="outline" size="md" onClick={() => onUndo(dose)} disabled={busy}>
+              {t('medications.undo')}
+            </Button>
+          ) : (
+            <Button
+              size="md"
+              onClick={() => onMarkTaken(dose)}
+              disabled={busy}
+              leadingIcon={<Icon name="check" size={20} />}
+            >
+              {t('medications.markTaken')}
+            </Button>
+          )}
+          {onDelete && (
+            <IconButton
+              label={t('medications.deleteLabel')}
+              icon="trash"
+              iconSize={20}
+              className="text-content-variant hover:text-sos"
+              onClick={() => onDelete(dose)}
+              disabled={busy}
+            />
+          )}
+        </div>
       </div>
     </div>
   )

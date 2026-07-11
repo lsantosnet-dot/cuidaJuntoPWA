@@ -9,6 +9,7 @@ import {
   markDoseTaken,
   undoDose,
   addMedication as addMedicationApi,
+  deleteMedication,
 } from './api'
 import type { Dose, MedicationRow, MedicationLogRow, NewMedication } from './types'
 
@@ -130,5 +131,22 @@ export function useMedications() {
     [mode, supabase, circleId, reload],
   )
 
-  return { doses, isLoading, error, markTaken, undo, addMedication }
+  const removeMedication = useCallback(
+    async (medicationId: string) => {
+      if (mode === 'demo') {
+        updateDemo((prev) => ({
+          ...prev,
+          medications: prev.medications.filter((m) => m.id !== medicationId),
+          medicationLogs: prev.medicationLogs.filter((l) => l.medication_id !== medicationId),
+        }))
+        return
+      }
+      if (!supabase) return
+      await deleteMedication(supabase, medicationId)
+      await reload()
+    },
+    [mode, supabase, reload],
+  )
+
+  return { doses, isLoading, error, markTaken, undo, addMedication, removeMedication }
 }

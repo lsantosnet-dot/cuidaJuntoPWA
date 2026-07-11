@@ -1,9 +1,21 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHeader, Button, Icon, EmptyState, Spinner, Card, Avatar, Chip } from '@/components/ui'
+import {
+  PageHeader,
+  Button,
+  Icon,
+  IconButton,
+  EmptyState,
+  Spinner,
+  Card,
+  Avatar,
+  Chip,
+  ConfirmDialog,
+} from '@/components/ui'
 import { useDisclosure } from '@/hooks/useDisclosure'
 import { useTeam } from './useTeam'
 import { InviteForm } from './components/InviteForm'
-import type { MembershipRole } from './types'
+import type { MembershipRole, MembershipRow } from './types'
 
 const ROLE_TONE: Record<MembershipRole, 'teal' | 'sage' | 'sand'> = {
   admin: 'teal',
@@ -13,8 +25,23 @@ const ROLE_TONE: Record<MembershipRole, 'teal' | 'sage' | 'sand'> = {
 
 export function TeamView() {
   const { t } = useTranslation()
-  const { members, invites, isLoading, error, invite, revoke } = useTeam()
+  const { members, invites, isLoading, error, invite, revoke, remove, currentUserId } = useTeam()
   const form = useDisclosure()
+  const [pendingDelete, setPendingDelete] = useState<MembershipRow | null>(null)
+  const [deleting, setDeleting] = useState(false)
+
+  const isAdmin = members.some((m) => m.user_id === currentUserId && m.role === 'admin')
+
+  const confirmDelete = async () => {
+    if (!pendingDelete) return
+    setDeleting(true)
+    try {
+      await remove(pendingDelete.id)
+      setPendingDelete(null)
+    } finally {
+      setDeleting(false)
+    }
+  }
 
   return (
     <div>
@@ -53,6 +80,15 @@ export function TeamView() {
                         )}
                       </div>
                       <Chip tone={ROLE_TONE[m.role]}>{t(`team.role.${m.role}`)}</Chip>
+                      {isAdmin && m.user_id !== currentUserId && (
+                        <IconButton
+                          label={t('team.removeLabel')}
+                          icon="trash"
+                          iconSize={20}
+                          className="text-content-variant hover:text-sos"
+                          onClick={() => setPendingDelete(m)}
+                        />
+                      )}
                     </div>
                   </Card>
                 </li>
@@ -93,6 +129,19 @@ export function TeamView() {
       )}
 
       <InviteForm isOpen={form.isOpen} onClose={form.close} onSubmit={invite} />
+
+      <ConfirmDialog
+        isOpen={pendingDelete !== null}
+        onClose={() => setPendingDelete(null)}
+        onConfirm={() => void confirmDelete()}
+        busy={deleting}
+        title={t('team.removeTitle')}
+        description={t('team.removeDescription', {
+          name: pendingDelete?.display_name ?? pendingDelete?.email ?? '',
+        })}
+        confirmLabel={t('common.delete')}
+        cancelLabel={t('common.cancel')}
+      />
     </div>
   )
 }

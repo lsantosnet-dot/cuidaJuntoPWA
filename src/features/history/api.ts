@@ -14,6 +14,11 @@ export async function fetchRecords(
   return data ?? []
 }
 
+export async function deleteRecord(supabase: AppSupabaseClient, recordId: string): Promise<void> {
+  const { error } = await supabase.from('medical_records').delete().eq('id', recordId)
+  if (error) throw error
+}
+
 export async function addRecord(
   supabase: AppSupabaseClient,
   circleId: string,

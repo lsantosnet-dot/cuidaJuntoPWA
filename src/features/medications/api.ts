@@ -59,6 +59,14 @@ export async function undoDose(supabase: AppSupabaseClient, logId: string): Prom
   if (error) throw error
 }
 
+export async function deleteMedication(
+  supabase: AppSupabaseClient,
+  medicationId: string,
+): Promise<void> {
+  const { error } = await supabase.from('medications').delete().eq('id', medicationId)
+  if (error) throw error
+}
+
 export async function addMedication(
   supabase: AppSupabaseClient,
   circleId: string,
