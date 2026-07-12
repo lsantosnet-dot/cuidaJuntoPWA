@@ -5,7 +5,6 @@ import { Icon, IconButton } from '@/components/ui'
 import { UserMenu } from '@/features/auth'
 import { useCareCircle } from '@/features/care-circle'
 import { useTutorial } from '@/features/tutorial'
-import { LanguageToggle } from './LanguageToggle'
 import { APP_VERSION } from '@/config/appInfo'
 import { cn } from '@/lib/cn'
 
@@ -109,7 +108,6 @@ export function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
 
         <div className="flex flex-col gap-4 border-t border-outline-variant p-4">
           <UserMenu />
-          <LanguageToggle />
           <p className="text-center text-sm text-content-variant">
             {t('drawer.version', { version: APP_VERSION })}
           </p>
