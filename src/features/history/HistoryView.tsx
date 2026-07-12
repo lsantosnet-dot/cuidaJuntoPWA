@@ -9,7 +9,7 @@ import type { MedicalRecordRow } from './types'
 
 export function HistoryView() {
   const { t } = useTranslation()
-  const { records, isLoading, error, add, remove } = useHistory()
+  const { records, isLoading, error, add, remove, getDownloadUrl } = useHistory()
   const form = useDisclosure()
   const [pendingDelete, setPendingDelete] = useState<MedicalRecordRow | null>(null)
   const [deleting, setDeleting] = useState(false)
@@ -18,7 +18,7 @@ export function HistoryView() {
     if (!pendingDelete) return
     setDeleting(true)
     try {
-      await remove(pendingDelete.id)
+      await remove(pendingDelete)
       setPendingDelete(null)
     } finally {
       setDeleting(false)
@@ -56,7 +56,7 @@ export function HistoryView() {
         <ul className="flex flex-col gap-3">
           {records.map((r) => (
             <li key={r.id}>
-              <RecordCard record={r} onDelete={setPendingDelete} />
+              <RecordCard record={r} onDelete={setPendingDelete} onDownload={getDownloadUrl} />
             </li>
           ))}
         </ul>

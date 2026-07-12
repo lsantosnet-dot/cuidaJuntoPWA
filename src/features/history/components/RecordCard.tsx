@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Card, Chip, Icon, IconButton } from '@/components/ui'
 import { cn } from '@/lib/cn'
@@ -16,13 +17,28 @@ const CATEGORY_TONE: Record<RecordCategory, 'teal' | 'sage' | 'sand' | 'neutral'
 export function RecordCard({
   record,
   onDelete,
+  onDownload,
 }: {
   record: MedicalRecordRow
   onDelete: (record: MedicalRecordRow) => void
+  onDownload: (record: MedicalRecordRow) => Promise<string | null>
 }) {
   const { t } = useTranslation()
   const { current } = useLanguage()
   const { isOpen: expanded, toggle } = useDisclosure()
+  const [downloading, setDownloading] = useState(false)
+  const hasAttachment = record.category === 'document' && Boolean(record.attachment_url)
+
+  const handleDownload = async () => {
+    if (downloading) return
+    setDownloading(true)
+    try {
+      const url = await onDownload(record)
+      if (url) window.open(url, '_blank', 'noopener,noreferrer')
+    } finally {
+      setDownloading(false)
+    }
+  }
 
   return (
     <Card>
@@ -52,6 +68,16 @@ export function RecordCard({
             />
           </div>
         </button>
+        {hasAttachment && (
+          <IconButton
+            label={t('history.downloadLabel')}
+            icon="download"
+            iconSize={20}
+            className="shrink-0 text-content-variant hover:text-primary"
+            disabled={downloading}
+            onClick={() => void handleDownload()}
+          />
+        )}
         <IconButton
           label={t('history.deleteLabel')}
           icon="trash"

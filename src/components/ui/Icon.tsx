@@ -130,6 +130,12 @@ const ICON_PATHS = {
       <path d="M8.5 12h7M8.5 15.5h7M8.5 8.5h3" />
     </>
   ),
+  download: (
+    <>
+      <path d="M12 3.5v11M8 10.5l4 4 4-4" />
+      <path d="M4.5 16v2.5A2.5 2.5 0 0 0 7 21h10a2.5 2.5 0 0 0 2.5-2.5V16" />
+    </>
+  ),
 } as const
 
 export type IconName = keyof typeof ICON_PATHS

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useCareData } from '@/features/data/useCareData'
 import { useDemoState, updateDemo } from '@/features/demo/demoStore'
 import { uuid } from '@/lib/id'
-import { fetchRecords, addRecord, deleteRecord } from './api'
+import { fetchRecords, addRecord, deleteRecord, getAttachmentDownloadUrl } from './api'
 import type { MedicalRecordRow, NewRecord } from './types'
 
 export function useHistory() {
@@ -42,7 +42,7 @@ export function useHistory() {
               category: input.category,
               record_date: input.recordDate,
               details: input.details || null,
-              attachment_url: null,
+              attachment_url: input.attachment ? URL.createObjectURL(input.attachment) : null,
               created_at: new Date().toISOString(),
             },
             ...prev.records,
@@ -58,20 +58,36 @@ export function useHistory() {
   )
 
   const remove = useCallback(
-    async (recordId: string) => {
+    async (record: MedicalRecordRow) => {
       if (mode === 'demo') {
         updateDemo((prev) => ({
           ...prev,
-          records: prev.records.filter((r) => r.id !== recordId),
+          records: prev.records.filter((r) => r.id !== record.id),
         }))
         return
       }
       if (!supabase) return
-      await deleteRecord(supabase, recordId)
+      await deleteRecord(supabase, record.id, record.attachment_url)
       await reload()
     },
     [mode, supabase, reload],
   )
 
-  return { records: mode === 'demo' ? demo.records : records, isLoading, error, add, remove }
+  const getDownloadUrl = useCallback(
+    async (record: MedicalRecordRow): Promise<string | null> => {
+      if (!record.attachment_url) return null
+      if (mode === 'demo' || !supabase) return record.attachment_url
+      return getAttachmentDownloadUrl(supabase, record.attachment_url)
+    },
+    [mode, supabase],
+  )
+
+  return {
+    records: mode === 'demo' ? demo.records : records,
+    isLoading,
+    error,
+    add,
+    remove,
+    getDownloadUrl,
+  }
 }
