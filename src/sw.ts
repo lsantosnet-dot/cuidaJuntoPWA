@@ -8,12 +8,17 @@ declare const self: ServiceWorkerGlobalScope
 cleanupOutdatedCaches()
 precacheAndRoute(self.__WB_MANIFEST)
 
-self.addEventListener('install', () => {
-  void self.skipWaiting()
-})
-
 self.addEventListener('activate', (event) => {
   event.waitUntil(self.clients.claim())
+})
+
+// --- Update flow (prompt-based) ----------------------------------------------
+// registerType: 'prompt' means the new SW waits in the "waiting" state until
+// the user confirms via UpdateNotice.tsx, which then posts this message.
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'SKIP_WAITING') {
+    void self.skipWaiting()
+  }
 })
 
 // --- Web Push (wired up in Phase 4) ------------------------------------------

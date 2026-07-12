@@ -30,8 +30,11 @@ export default defineConfig({
       strategies: 'injectManifest',
       srcDir: 'src',
       filename: 'sw.ts',
-      registerType: 'autoUpdate',
-      injectRegister: 'auto',
+      // 'prompt' + manual registration (see UpdateNotice.tsx) so users get a
+      // visible notice and control when the app reloads, instead of vite-plugin-pwa
+      // silently swapping the app under them.
+      registerType: 'prompt',
+      injectRegister: false,
       devOptions: {
         enabled: true,
         type: 'module',

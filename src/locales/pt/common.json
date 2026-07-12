@@ -67,6 +67,10 @@
     "title": "Modo demonstração.",
     "message": "O login ainda não foi configurado, então os dados não são salvos."
   },
+  "pwa": {
+    "updateAvailable": "Uma nova versão do CuidaJunto está disponível.",
+    "update": "Atualizar"
+  },
   "sos": {
     "title": "Emergência",
     "description": "Isto alertará toda a equipe de cuidado imediatamente.",
