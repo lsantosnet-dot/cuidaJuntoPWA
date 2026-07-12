@@ -1,7 +1,7 @@
 {
   "name": "cuidajunto-pwa",
   "private": true,
-  "version": "1.0.20",
+  "version": "1.0.21",
   "type": "module",
   "description": "CuidaJunto — PWA de cuidado compartilhado para famílias e cuidadores",
   "scripts": {
@@ -17,6 +17,8 @@
     "@supabase/supabase-js": "^2.45.4",
     "i18next": "^23.15.1",
     "i18next-browser-languagedetector": "^8.0.0",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.0.2",

@@ -13,6 +13,7 @@
     "team": "Equipe",
     "costs": "Custos",
     "history": "Histórico médico",
+    "reports": "Relatórios",
     "profile": "Perfil do idoso",
     "settings": "Configurações"
   },
@@ -348,6 +349,55 @@
     "emptyTitle": "Perfil ainda não preenchido",
     "emptyDescription": "Adicione os dados do idoso para a equipe ter tudo à mão."
   },
+  "reports": {
+    "doctorReport": {
+      "title": "Relatório para o médico",
+      "description": "Gera um PDF com o perfil do paciente, medicações, histórico médico, diário e rotina para levar à consulta.",
+      "action": "Gerar PDF",
+      "generating": "Gerando PDF…",
+      "error": "Não foi possível gerar o relatório."
+    },
+    "pdf": {
+      "documentTitle": "Relatório de Acompanhamento",
+      "subtitle": "Documento de apoio ao acompanhamento médico",
+      "generatedAt": "Gerado em {{date}}",
+      "patientSection": "Dados do paciente",
+      "name": "Nome",
+      "age": "Idade",
+      "birthDate": "Nascimento",
+      "conditions": "Condições de saúde",
+      "notes": "Observações",
+      "noData": "Não informado",
+      "medicationsSection": "Medicações em uso",
+      "medicationName": "Medicamento",
+      "dosage": "Dosagem",
+      "schedule": "Horários",
+      "instructions": "Instruções",
+      "noMedications": "Nenhuma medicação registrada.",
+      "historySection": "Histórico médico",
+      "recordDate": "Data",
+      "recordTitle": "Título",
+      "recordCategory": "Categoria",
+      "recordDetails": "Detalhes",
+      "noRecords": "Nenhum registro no histórico médico.",
+      "diarySection": "Diário de cuidados (registros recentes)",
+      "diaryDate": "Data",
+      "diaryAuthor": "Autor",
+      "diaryMood": "Humor",
+      "diarySleep": "Sono",
+      "diaryAppetite": "Apetite",
+      "diaryContent": "Observações",
+      "noDiary": "Nenhum registro no diário.",
+      "routineSection": "Rotina de cuidados acompanhada",
+      "routineItem": "Item",
+      "routineType": "Tipo",
+      "routineTarget": "Meta diária",
+      "noRoutine": "Nenhum item de rotina cadastrado.",
+      "footer": "Gerado pelo app CuidaJunto em {{date}}. Documento de apoio ao cuidado — não substitui avaliação clínica presencial.",
+      "confidential": "Documento pessoal e confidencial.",
+      "page": "Página {{page}} de {{total}}"
+    }
+  },
   "pages": {
     "home": {
       "title": "Início",
@@ -384,6 +434,10 @@
     "history": {
       "title": "Histórico médico",
       "subtitle": "Exames, consultas e documentos."
+    },
+    "reports": {
+      "title": "Relatórios",
+      "subtitle": "Gere documentos para compartilhar com a equipe de cuidado."
     },
     "profile": {
       "title": "Perfil do idoso",

@@ -25,6 +25,7 @@ export const CARE_NAV: NavItem[] = [
   { path: ROUTES.team, labelKey: 'nav.team', icon: 'users' },
   { path: ROUTES.diary, labelKey: 'nav.diary', icon: 'book' },
   { path: ROUTES.history, labelKey: 'nav.history', icon: 'history' },
+  { path: ROUTES.reports, labelKey: 'nav.reports', icon: 'fileText' },
   { path: ROUTES.profile, labelKey: 'nav.profile', icon: 'user' },
 ]
 

@@ -14,6 +14,7 @@ const CirclesPage = lazy(() => import('@/pages/CirclesPage'))
 const TeamPage = lazy(() => import('@/pages/TeamPage'))
 const CostsPage = lazy(() => import('@/pages/CostsPage'))
 const HistoryPage = lazy(() => import('@/pages/HistoryPage'))
+const ReportsPage = lazy(() => import('@/pages/ReportsPage'))
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'))
 const SettingsPage = lazy(() => import('@/pages/SettingsPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
@@ -102,6 +103,14 @@ export function AppRouter() {
             element={
               <Suspense fallback={<RouteFallback />}>
                 <HistoryPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.reports}
+            element={
+              <Suspense fallback={<RouteFallback />}>
+                <ReportsPage />
               </Suspense>
             }
           />

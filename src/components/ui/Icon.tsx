@@ -123,6 +123,13 @@ const ICON_PATHS = {
   droplet: <path d="M12 3s6 6.5 6 11a6 6 0 1 1-12 0c0-4.5 6-11 6-11z" />,
   minus: <path d="M5 12h14" />,
   circle: <circle cx="12" cy="12" r="8.5" />,
+  fileText: (
+    <>
+      <path d="M6.5 2.5h8L19 7v14a1 1 0 0 1-1 1H6.5a1 1 0 0 1-1-1v-17.5a1 1 0 0 1 1-1z" />
+      <path d="M14 2.5V7h5" />
+      <path d="M8.5 12h7M8.5 15.5h7M8.5 8.5h3" />
+    </>
+  ),
 } as const
 
 export type IconName = keyof typeof ICON_PATHS

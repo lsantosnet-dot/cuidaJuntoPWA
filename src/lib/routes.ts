@@ -12,6 +12,7 @@ export const ROUTES = {
   team: '/team',
   costs: '/costs',
   history: '/history',
+  reports: '/reports',
   profile: '/profile',
   settings: '/settings',
   join: '/join',
