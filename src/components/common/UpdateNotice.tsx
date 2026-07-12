@@ -18,6 +18,10 @@ export function UpdateNotice() {
   } = useRegisterSW({
     onRegisteredSW(_swUrl, registration) {
       if (!registration) return
+      // Check right away too: registration.update() bypasses the browser's
+      // own ~24h throttle on background checks, so a plain refresh actually
+      // picks up a version that was just deployed instead of waiting on it.
+      void registration.update()
       setInterval(() => {
         void registration.update()
       }, UPDATE_CHECK_INTERVAL)
