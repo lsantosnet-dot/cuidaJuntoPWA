@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHeader, Button, Icon, EmptyState, Spinner, ConfirmDialog } from '@/components/ui'
+import { PageHeader, Button, Icon, EmptyState, Spinner, ConfirmDialog, Card } from '@/components/ui'
 import { useDisclosure } from '@/hooks/useDisclosure'
+import { useLanguage } from '@/hooks/useLanguage'
+import { formatCurrency } from '@/lib/money'
 import { useCosts } from './useCosts'
 import { BalanceSummary } from './components/BalanceSummary'
 import { CostEntryCard } from './components/CostEntryCard'
@@ -25,10 +27,20 @@ export function CostsView() {
     settle,
     currentUserId,
   } = useCosts()
+  const { current } = useLanguage()
   const form = useDisclosure()
   const [pendingDelete, setPendingDelete] = useState<CostEntryRow | null>(null)
   const [deleting, setDeleting] = useState(false)
   const [pendingSettle, setPendingSettle] = useState<SimplifiedDebt | null>(null)
+
+  const now = new Date()
+  const monthTotalCents = entries
+    .filter((e) => {
+      const d = new Date(e.expense_date)
+      return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth()
+    })
+    .reduce((sum, e) => sum + e.amount_cents, 0)
+  const pendingReimbursementCents = simplifiedDebts.reduce((sum, d) => sum + d.amountCents, 0)
 
   const confirmDelete = async () => {
     if (!pendingDelete) return
@@ -70,6 +82,21 @@ export function CostsView() {
         />
       ) : (
         <div className="flex flex-col gap-6">
+          <div className="grid grid-cols-2 gap-3">
+            <Card elevated={false}>
+              <p className="text-sm font-semibold text-content-variant">{t('costs.monthTotal')}</p>
+              <p className="mt-1 text-lg font-bold text-content">
+                {formatCurrency(monthTotalCents, current)}
+              </p>
+            </Card>
+            <Card elevated={false}>
+              <p className="text-sm font-semibold text-content-variant">{t('costs.pendingReimbursement')}</p>
+              <p className="mt-1 text-lg font-bold text-tertiary">
+                {formatCurrency(pendingReimbursementCents, current)}
+              </p>
+            </Card>
+          </div>
+
           <BalanceSummary
             balances={balances}
             simplifiedDebts={simplifiedDebts}

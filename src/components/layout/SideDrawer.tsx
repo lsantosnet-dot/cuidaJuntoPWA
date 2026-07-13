@@ -21,16 +21,16 @@ function DrawerLink({ item, onNavigate }: { item: NavItem; onNavigate: () => voi
       onClick={onNavigate}
       className={({ isActive }) =>
         cn(
-          'flex min-h-touch items-center gap-3 rounded-card px-3 text-base font-semibold transition-colors',
+          'flex min-h-[52px] items-center gap-3 rounded-card px-3 text-base font-semibold transition-colors',
           isActive
             ? 'bg-primary/10 text-primary'
             : 'text-content hover:bg-surface-container',
         )
       }
     >
-      <Icon name={item.icon} size={22} />
+      <Icon name={item.icon} size={22} className="shrink-0" />
       <span className="flex-1">{t(item.labelKey)}</span>
-      <Icon name="chevronRight" size={18} />
+      <Icon name="chevronRight" size={18} className="shrink-0 text-content-variant" />
     </NavLink>
   )
 }
@@ -78,35 +78,35 @@ export function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
         </div>
 
         <nav className="flex-1 overflow-y-auto px-3 pb-4">
-          <p className="px-3 pb-1 pt-3 text-sm font-semibold uppercase tracking-wide text-content-variant">
+          <p className="px-3 pb-2 pt-4 text-sm font-semibold uppercase tracking-wide text-content-variant">
             {t('drawer.sectionCare')}
           </p>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1.5">
             {CARE_NAV.map((item) => (
               <DrawerLink key={item.path} item={item} onNavigate={onClose} />
             ))}
           </div>
 
-          <p className="px-3 pb-1 pt-5 text-sm font-semibold uppercase tracking-wide text-content-variant">
+          <p className="px-3 pb-2 pt-6 text-sm font-semibold uppercase tracking-wide text-content-variant">
             {t('drawer.sectionAccount')}
           </p>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1.5">
             {ACCOUNT_NAV.map((item) => (
               <DrawerLink key={item.path} item={item} onNavigate={onClose} />
             ))}
             <button
               type="button"
               onClick={handleOpenTutorial}
-              className="flex min-h-touch items-center gap-3 rounded-card px-3 text-left text-base font-semibold text-content transition-colors hover:bg-surface-container"
+              className="flex min-h-[52px] items-center gap-3 rounded-card px-3 text-left text-base font-semibold text-content transition-colors hover:bg-surface-container"
             >
-              <Icon name="info" size={22} />
+              <Icon name="info" size={22} className="shrink-0" />
               <span className="flex-1">{t('drawer.tutorial')}</span>
-              <Icon name="chevronRight" size={18} />
+              <Icon name="chevronRight" size={18} className="shrink-0 text-content-variant" />
             </button>
           </div>
         </nav>
 
-        <div className="flex flex-col gap-4 border-t border-outline-variant p-4">
+        <div className="flex flex-col gap-4 border-t border-outline-variant bg-surface-low p-4">
           <UserMenu />
           <p className="text-center text-sm text-content-variant">
             {t('drawer.version', { version: APP_VERSION })}

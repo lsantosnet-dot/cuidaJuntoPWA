@@ -13,10 +13,22 @@ interface DoseCardProps {
   /** Omit to hide the delete action (e.g. dashboard preview tiles). */
   onDelete?: (dose: Dose) => void
   busy?: boolean
+  /** Name of the caregiver currently on duty, shown as the responsible party for doses not yet taken. */
+  caregiverName?: string | null
+  /** Whether the scheduled time is still ahead of now (vs. already due). Only meaningful when pending. */
+  isUpcoming?: boolean
 }
 
-/** Medication dose card with a left status strip (green taken / amber pending). */
-export function DoseCard({ dose, onMarkTaken, onUndo, onDelete, busy }: DoseCardProps) {
+/** Medication dose card with a left status strip (green taken / amber due / teal upcoming). */
+export function DoseCard({
+  dose,
+  onMarkTaken,
+  onUndo,
+  onDelete,
+  busy,
+  caregiverName,
+  isUpcoming,
+}: DoseCardProps) {
   const { t } = useTranslation()
   const { current } = useLanguage()
   const { isOpen: expanded, toggle } = useDisclosure()
@@ -24,7 +36,10 @@ export function DoseCard({ dose, onMarkTaken, onUndo, onDelete, busy }: DoseCard
 
   return (
     <div className="flex overflow-hidden rounded-card bg-surface-lowest shadow-card dark:ring-1 dark:ring-white/10">
-      <span className={cn('w-1.5 shrink-0', taken ? 'bg-secondary' : 'bg-tertiary')} aria-hidden="true" />
+      <span
+        className={cn('w-1.5 shrink-0', taken ? 'bg-secondary' : isUpcoming ? 'bg-primary' : 'bg-tertiary')}
+        aria-hidden="true"
+      />
       <button
         type="button"
         onClick={toggle}
@@ -46,11 +61,18 @@ export function DoseCard({ dose, onMarkTaken, onUndo, onDelete, busy }: DoseCard
               })}
             </p>
           ) : (
-            dose.instructions && (
-              <p className={cn('text-sm text-content-variant', !expanded && 'truncate')}>
-                {dose.instructions}
-              </p>
-            )
+            <>
+              {dose.instructions && (
+                <p className={cn('text-sm text-content-variant', !expanded && 'truncate')}>
+                  {dose.instructions}
+                </p>
+              )}
+              {caregiverName && (
+                <p className={cn('text-sm text-content-variant', !expanded && 'truncate')}>
+                  {t('medications.responsibleCaregiver', { name: caregiverName })}
+                </p>
+              )}
+            </>
           )}
         </div>
         <Icon
