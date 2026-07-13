@@ -2,15 +2,31 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PageHeader, Button, Icon, EmptyState, Spinner, ConfirmDialog } from '@/components/ui'
 import { useDisclosure } from '@/hooks/useDisclosure'
+import { useShifts } from '@/features/shifts'
 import { useMedications } from './useMedications'
 import { DoseCard } from './components/DoseCard'
 import { AddMedicationForm } from './components/AddMedicationForm'
 import type { Dose } from './types'
 
+/** Groups today's doses into due-now / upcoming / completed for a timeline-style read. */
+function groupDoses(doses: Dose[]) {
+  const now = Date.now()
+  const due: Dose[] = []
+  const upcoming: Dose[] = []
+  const completed: Dose[] = []
+  for (const dose of doses) {
+    if (dose.status === 'taken') completed.push(dose)
+    else if (new Date(dose.scheduledFor).getTime() <= now) due.push(dose)
+    else upcoming.push(dose)
+  }
+  return { due, upcoming, completed }
+}
+
 export function MedicationsView() {
   const { t } = useTranslation()
   const { doses, isLoading, error, markTaken, undo, addMedication, removeMedication } =
     useMedications()
+  const { activeShift } = useShifts()
   const form = useDisclosure()
   const [busyKey, setBusyKey] = useState<string | null>(null)
   const [pendingDelete, setPendingDelete] = useState<Dose | null>(null)
@@ -37,6 +53,32 @@ export function MedicationsView() {
   }
 
   const pending = doses.filter((d) => d.status === 'pending')
+  const { due, upcoming, completed } = groupDoses(doses)
+  const caregiverName = activeShift?.caregiver_name ?? null
+
+  const renderGroup = (label: string, group: Dose[], isUpcoming = false) =>
+    group.length > 0 && (
+      <section key={label}>
+        <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-content-variant">
+          {label} · {group.length}
+        </h2>
+        <ul className="flex flex-col gap-3">
+          {group.map((dose) => (
+            <li key={dose.key}>
+              <DoseCard
+                dose={dose}
+                busy={busyKey === dose.key}
+                onMarkTaken={(d) => runOn(d, markTaken)}
+                onUndo={(d) => runOn(d, undo)}
+                onDelete={setPendingDelete}
+                caregiverName={dose.status === 'pending' ? caregiverName : undefined}
+                isUpcoming={isUpcoming}
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
 
   return (
     <div>
@@ -69,19 +111,11 @@ export function MedicationsView() {
           }
         />
       ) : (
-        <ul className="flex flex-col gap-3">
-          {doses.map((dose) => (
-            <li key={dose.key}>
-              <DoseCard
-                dose={dose}
-                busy={busyKey === dose.key}
-                onMarkTaken={(d) => runOn(d, markTaken)}
-                onUndo={(d) => runOn(d, undo)}
-                onDelete={setPendingDelete}
-              />
-            </li>
-          ))}
-        </ul>
+        <div className="flex flex-col gap-6">
+          {renderGroup(t('medications.sectionDue'), due)}
+          {renderGroup(t('medications.sectionUpcoming'), upcoming, true)}
+          {renderGroup(t('medications.sectionCompleted'), completed)}
+        </div>
       )}
 
       <AddMedicationForm isOpen={form.isOpen} onClose={form.close} onSubmit={addMedication} />

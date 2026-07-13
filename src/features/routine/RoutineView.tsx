@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHeader, Button, Icon, EmptyState, Spinner, ConfirmDialog } from '@/components/ui'
+import { PageHeader, Button, Icon, EmptyState, Spinner, ConfirmDialog, ProgressBar } from '@/components/ui'
 import { useDisclosure } from '@/hooks/useDisclosure'
 import { useRoutine } from './useRoutine'
 import { RoutineItemCard } from './components/RoutineItemCard'
@@ -41,10 +41,19 @@ export function RoutineView() {
     <div>
       <PageHeader title={t('pages.routine.title')} subtitle={t('pages.routine.subtitle')} />
 
-      <div className="mb-4 flex items-center justify-between">
-        <p className="text-base font-semibold text-content-variant">
-          {t('routine.todayProgress', { done, total: progress.length })}
-        </p>
+      {progress.length > 0 && (
+        <div className="mb-4 flex flex-col gap-2">
+          <p className="text-base font-semibold text-content-variant">
+            {t('routine.todayProgress', { done, total: progress.length })}
+          </p>
+          <ProgressBar
+            value={progress.length ? done / progress.length : 0}
+            label={t('routine.todayProgress', { done, total: progress.length })}
+          />
+        </div>
+      )}
+
+      <div className="mb-4 flex justify-end">
         <Button size="md" onClick={form.open} leadingIcon={<Icon name="plus" size={20} />}>
           {t('routine.add')}
         </Button>

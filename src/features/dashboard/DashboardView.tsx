@@ -5,9 +5,11 @@ import { ROUTES } from '@/lib/routes'
 import { useProfile } from '@/features/profile'
 import { useMedications } from '@/features/medications'
 import { useShifts } from '@/features/shifts'
+import { useRoutine } from '@/features/routine'
 import { useDiary } from '@/features/diary'
 import { DiaryCard } from '@/features/diary/components/DiaryCard'
 import { DoseCard } from '@/features/medications/components/DoseCard'
+import { RoutineItemCard } from '@/features/routine/components/RoutineItemCard'
 import { SummaryTile } from './components/SummaryTile'
 
 export function DashboardView() {
@@ -15,10 +17,17 @@ export function DashboardView() {
   const { recipient } = useProfile()
   const { doses, markTaken, undo } = useMedications()
   const { activeShift } = useShifts()
+  const { progress, markDone, undoLast } = useRoutine()
   const { entries } = useDiary()
 
-  const pending = doses.filter((d) => d.status === 'pending')
-  const nextDose = pending[0]
+  const pendingDoses = doses.filter((d) => d.status === 'pending')
+  const nextDose = pendingDoses[0]
+  const doseOverdue = Boolean(nextDose && new Date(nextDose.scheduledFor).getTime() <= Date.now())
+
+  const pendingRoutine = progress.filter((p) => p.doneCount < p.target)
+  const nextRoutine = pendingRoutine[0]
+
+  const pendingTotal = pendingDoses.length + pendingRoutine.length
   const latestEntry = entries[0]
 
   return (
@@ -33,37 +42,60 @@ export function DashboardView() {
         </div>
       </header>
 
-      <div className="grid grid-cols-2 gap-3">
-        <SummaryTile
-          to={ROUTES.schedule}
-          icon="calendar"
-          label={t('dashboard.onDuty')}
-          value={activeShift?.caregiver_name ?? t('shifts.nobody')}
-        />
-        <SummaryTile
-          to={ROUTES.medications}
-          icon="pill"
-          label={t('dashboard.medsToday')}
-          value={t('medications.remaining', { count: pending.length })}
-        />
-      </div>
+      {/* Today's Care Summary: the most urgent, most-scanned information, all above the fold. */}
+      <section className="flex flex-col gap-3">
+        <h2 className="text-lg font-bold text-content">{t('dashboard.summaryTitle')}</h2>
 
-      <section>
-        <div className="mb-2 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-content">{t('dashboard.nextDose')}</h2>
-          <Link to={ROUTES.medications} className="text-base font-semibold text-primary">
-            {t('dashboard.seeAll')}
-          </Link>
+        <div className="grid grid-cols-2 gap-3">
+          <SummaryTile
+            to={ROUTES.schedule}
+            icon="users"
+            label={t('dashboard.onDuty')}
+            value={activeShift?.caregiver_name ?? t('shifts.nobody')}
+          />
+          <SummaryTile
+            to={pendingTotal > 0 ? ROUTES.medications : ROUTES.routine}
+            icon="alert"
+            label={t('dashboard.pendingTasks')}
+            value={t('dashboard.pendingCount', { count: pendingTotal })}
+            urgent={pendingTotal > 0}
+          />
         </div>
-        {nextDose ? (
-          <DoseCard dose={nextDose} onMarkTaken={markTaken} onUndo={undo} />
-        ) : (
-          <Card elevated={false}>
-            <p className="text-base text-content-variant">{t('dashboard.allDosesDone')}</p>
-          </Card>
-        )}
+
+        <div>
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-base font-bold text-content">{t('dashboard.nextDose')}</h3>
+            <Link to={ROUTES.medications} className="text-base font-semibold text-primary">
+              {t('dashboard.seeAll')}
+            </Link>
+          </div>
+          {nextDose ? (
+            <DoseCard dose={nextDose} onMarkTaken={markTaken} onUndo={undo} isUpcoming={!doseOverdue} />
+          ) : (
+            <Card elevated={false}>
+              <p className="text-base text-content-variant">{t('dashboard.allDosesDone')}</p>
+            </Card>
+          )}
+        </div>
+
+        <div>
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-base font-bold text-content">{t('dashboard.nextRoutine')}</h3>
+            <Link to={ROUTES.routine} className="text-base font-semibold text-primary">
+              {t('dashboard.seeAll')}
+            </Link>
+          </div>
+          {nextRoutine ? (
+            <RoutineItemCard progress={nextRoutine} onMarkDone={markDone} onUndo={undoLast} />
+          ) : (
+            <Card elevated={false}>
+              <p className="text-base text-content-variant">{t('dashboard.allRoutineDone')}</p>
+            </Card>
+          )}
+        </div>
       </section>
 
+      {/* Secondary information: worth a glance, but not competing with today's actions. */}
       <section>
         <div className="mb-2 flex items-center justify-between">
           <h2 className="text-lg font-bold text-content">{t('dashboard.latestDiary')}</h2>

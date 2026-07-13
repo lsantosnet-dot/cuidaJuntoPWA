@@ -13,7 +13,7 @@ export function BottomNav() {
       aria-label={t('drawer.title')}
       className="safe-bottom sticky bottom-0 z-30 border-t border-outline-variant bg-surface-low"
     >
-      <ul className="mx-auto flex max-w-app">
+      <ul className="mx-auto flex max-w-app gap-1 px-2 py-1.5">
         {PRIMARY_NAV.map((item) => (
           <li key={item.path} className="flex-1">
             <NavLink
@@ -21,22 +21,17 @@ export function BottomNav() {
               end={item.path === '/'}
               className={({ isActive }) =>
                 cn(
-                  'flex min-h-touch flex-col items-center justify-center gap-0.5 py-2',
-                  isActive ? 'text-primary' : 'text-content-variant',
+                  'flex min-h-touch flex-col items-center justify-center gap-0.5 rounded-card py-1.5 transition-colors',
+                  isActive ? 'bg-primary/10 text-primary' : 'text-content-variant',
                 )
               }
             >
               {({ isActive }) => (
                 <>
-                  <Icon name={item.icon} size={24} />
-                  <span className="text-xs font-semibold">{t(item.labelKey)}</span>
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      'mt-0.5 h-1 w-1 rounded-pill',
-                      isActive ? 'bg-primary' : 'bg-transparent',
-                    )}
-                  />
+                  <Icon name={item.icon} size={isActive ? 26 : 24} className="transition-[width,height]" />
+                  <span className={cn('text-xs', isActive ? 'font-bold' : 'font-semibold')}>
+                    {t(item.labelKey)}
+                  </span>
                 </>
               )}
             </NavLink>
