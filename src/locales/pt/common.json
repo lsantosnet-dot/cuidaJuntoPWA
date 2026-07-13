@@ -259,6 +259,9 @@
     "fieldEnd": "Término",
     "emptyTitle": "Quem vai cuidar agora?",
     "emptyDescription": "Assuma o plantão atual ou agende os próximos turnos da equipe.",
+    "deleteLabel": "Excluir plantão",
+    "deleteTitle": "Excluir plantão",
+    "deleteDescription": "Este plantão será excluído permanentemente.",
     "status": {
       "active": "Em plantão",
       "scheduled": "Agendado",

@@ -45,6 +45,11 @@ export async function endShift(supabase: AppSupabaseClient, shiftId: string): Pr
   if (error) throw error
 }
 
+export async function deleteShift(supabase: AppSupabaseClient, shiftId: string): Promise<void> {
+  const { error } = await supabase.from('shifts').delete().eq('id', shiftId)
+  if (error) throw error
+}
+
 export async function addShift(
   supabase: AppSupabaseClient,
   circleId: string,

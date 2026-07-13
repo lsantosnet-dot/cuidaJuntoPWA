@@ -259,6 +259,9 @@
     "fieldEnd": "End",
     "emptyTitle": "Who's caring right now?",
     "emptyDescription": "Take the current shift or schedule the team's upcoming turns.",
+    "deleteLabel": "Delete shift",
+    "deleteTitle": "Delete shift",
+    "deleteDescription": "This shift will be permanently deleted.",
     "status": {
       "active": "On duty",
       "scheduled": "Scheduled",
