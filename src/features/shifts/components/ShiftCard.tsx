@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Card, Avatar, Chip, Button } from '@/components/ui'
+import { Card, Avatar, Chip, Button, IconButton } from '@/components/ui'
 import { useLanguage } from '@/hooks/useLanguage'
 import { formatDayLabel, formatTime } from '@/lib/datetime'
 import type { ShiftRow } from '../types'
@@ -13,10 +13,13 @@ const STATUS_TONE = {
 export function ShiftCard({
   shift,
   onEnd,
+  onDelete,
   busy,
 }: {
   shift: ShiftRow
   onEnd: (id: string) => void
+  /** Omit to hide the delete action (e.g. dashboard preview tiles). */
+  onDelete?: (shift: ShiftRow) => void
   busy?: boolean
 }) {
   const { t } = useTranslation()
@@ -44,6 +47,16 @@ export function ShiftCard({
             </Button>
           )}
         </div>
+        {onDelete && (
+          <IconButton
+            label={t('shifts.deleteLabel')}
+            icon="trash"
+            iconSize={20}
+            className="shrink-0 text-content-variant hover:text-sos"
+            onClick={() => onDelete(shift)}
+            disabled={busy}
+          />
+        )}
       </div>
     </Card>
   )

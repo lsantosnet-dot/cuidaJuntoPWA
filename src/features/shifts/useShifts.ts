@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useCareData } from '@/features/data/useCareData'
 import { useDemoState, updateDemo } from '@/features/demo/demoStore'
 import { uuid } from '@/lib/id'
-import { fetchShifts, assumeShift, endShift, addShift } from './api'
+import { fetchShifts, assumeShift, endShift, addShift, deleteShift } from './api'
 import type { ShiftRow, NewShift } from './types'
 
 export function useShifts() {
@@ -109,5 +109,21 @@ export function useShifts() {
     [mode, supabase, circleId, reload],
   )
 
-  return { shifts: list, activeShift, isLoading, error, assume, end, add }
+  const remove = useCallback(
+    async (shiftId: string) => {
+      if (mode === 'demo') {
+        updateDemo((prev) => ({
+          ...prev,
+          shifts: prev.shifts.filter((s) => s.id !== shiftId),
+        }))
+        return
+      }
+      if (!supabase) return
+      await deleteShift(supabase, shiftId)
+      await reload()
+    },
+    [mode, supabase, reload],
+  )
+
+  return { shifts: list, activeShift, isLoading, error, assume, end, add, remove }
 }

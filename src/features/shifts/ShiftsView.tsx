@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHeader, Button, Icon, EmptyState, Spinner, Avatar } from '@/components/ui'
+import { PageHeader, Button, Icon, EmptyState, Spinner, Avatar, ConfirmDialog } from '@/components/ui'
 import { useDisclosure } from '@/hooks/useDisclosure'
 import { useLanguage } from '@/hooks/useLanguage'
 import { formatTime } from '@/lib/datetime'
@@ -95,7 +95,15 @@ function CurrentShift({
 }
 
 /** Past shifts rendered as a connected vertical timeline instead of plain cards. */
-function ShiftTimeline({ shifts }: { shifts: ShiftRow[] }) {
+function ShiftTimeline({
+  shifts,
+  busy,
+  onDelete,
+}: {
+  shifts: ShiftRow[]
+  busy: boolean
+  onDelete: (shift: ShiftRow) => void
+}) {
   return (
     <ol className="relative flex flex-col gap-4 border-l-2 border-outline-variant pl-5">
       {shifts.map((shift) => (
@@ -104,7 +112,7 @@ function ShiftTimeline({ shifts }: { shifts: ShiftRow[] }) {
             aria-hidden="true"
             className="absolute -left-[1.6rem] top-5 h-2.5 w-2.5 rounded-pill bg-outline-variant"
           />
-          <ShiftCard shift={shift} busy={false} onEnd={() => {}} />
+          <ShiftCard shift={shift} busy={busy} onEnd={() => {}} onDelete={onDelete} />
         </li>
       ))}
     </ol>
@@ -113,9 +121,11 @@ function ShiftTimeline({ shifts }: { shifts: ShiftRow[] }) {
 
 export function ShiftsView() {
   const { t } = useTranslation()
-  const { shifts, activeShift, isLoading, error, assume, end, add } = useShifts()
+  const { shifts, activeShift, isLoading, error, assume, end, add, remove } = useShifts()
   const form = useDisclosure()
   const [busy, setBusy] = useState(false)
+  const [pendingDelete, setPendingDelete] = useState<ShiftRow | null>(null)
+  const [deleting, setDeleting] = useState(false)
 
   const withBusy = async (fn: () => Promise<void>) => {
     setBusy(true)
@@ -123,6 +133,17 @@ export function ShiftsView() {
       await fn()
     } finally {
       setBusy(false)
+    }
+  }
+
+  const confirmDelete = async () => {
+    if (!pendingDelete) return
+    setDeleting(true)
+    try {
+      await remove(pendingDelete.id)
+      setPendingDelete(null)
+    } finally {
+      setDeleting(false)
     }
   }
 
@@ -167,7 +188,12 @@ export function ShiftsView() {
               <ul className="flex flex-col gap-3">
                 {upcoming.map((shift) => (
                   <li key={shift.id}>
-                    <ShiftCard shift={shift} busy={busy} onEnd={(id) => void withBusy(() => end(id))} />
+                    <ShiftCard
+                      shift={shift}
+                      busy={busy}
+                      onEnd={(id) => void withBusy(() => end(id))}
+                      onDelete={setPendingDelete}
+                    />
                   </li>
                 ))}
               </ul>
@@ -179,13 +205,24 @@ export function ShiftsView() {
               <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-content-variant">
                 {t('shifts.sectionHistory')} · {history.length}
               </h2>
-              <ShiftTimeline shifts={history} />
+              <ShiftTimeline shifts={history} busy={busy} onDelete={setPendingDelete} />
             </section>
           )}
         </div>
       )}
 
       <AddShiftForm isOpen={form.isOpen} onClose={form.close} onSubmit={add} />
+
+      <ConfirmDialog
+        isOpen={pendingDelete !== null}
+        onClose={() => setPendingDelete(null)}
+        onConfirm={() => void confirmDelete()}
+        busy={deleting}
+        title={t('shifts.deleteTitle')}
+        description={t('shifts.deleteDescription')}
+        confirmLabel={t('common.delete')}
+        cancelLabel={t('common.cancel')}
+      />
     </div>
   )
 }
