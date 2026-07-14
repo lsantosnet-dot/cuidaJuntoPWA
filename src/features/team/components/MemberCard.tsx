@@ -50,12 +50,18 @@ export function MemberCard({
                 <span className="font-normal text-content-variant"> · {youLabel}</span>
               )}
             </p>
-            <div className="mt-0.5 flex items-center gap-2">
-              <p className={cn('text-sm text-content-variant', !expanded && 'truncate')}>{detail}</p>
-              <Chip tone={ROLE_TONE[member.role]} className="ml-auto shrink-0">
-                {t(`team.role.${member.role}`)}
-              </Chip>
-            </div>
+            <Chip tone={ROLE_TONE[member.role]} className="mt-1 shrink-0">
+              {t(`team.role.${member.role}`)}
+            </Chip>
+            <p
+              className={cn(
+                'mt-0.5 text-sm text-content-variant',
+                !expanded && 'truncate',
+                expanded && 'break-words',
+              )}
+            >
+              {detail}
+            </p>
             {expanded && member.email && (
               <p className="mt-1 text-sm text-content-variant">{memberSince}</p>
             )}
