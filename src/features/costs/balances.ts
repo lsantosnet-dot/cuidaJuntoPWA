@@ -39,8 +39,10 @@ export function computeBalances(
   for (const entry of entries) bump(entry.paid_by, entry.paid_by_name, entry.amount_cents)
   for (const share of shares) bump(share.user_id, share.user_name, -share.share_cents)
   for (const settlement of settlements) {
-    bump(settlement.to_user_id, settlement.to_user_name, settlement.amount_cents)
-    bump(settlement.from_user_id, settlement.from_user_name, -settlement.amount_cents)
+    // A settlement pays down a debt: the debtor (from) owes less (balance
+    // moves toward zero) and the creditor (to) is owed less.
+    bump(settlement.from_user_id, settlement.from_user_name, settlement.amount_cents)
+    bump(settlement.to_user_id, settlement.to_user_name, -settlement.amount_cents)
   }
 
   return Array.from(balances.entries())
