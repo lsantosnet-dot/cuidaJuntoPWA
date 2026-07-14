@@ -40,75 +40,77 @@ export function DoseCard({
         className={cn('w-1.5 shrink-0', taken ? 'bg-secondary' : isUpcoming ? 'bg-primary' : 'bg-tertiary')}
         aria-hidden="true"
       />
-      <button
-        type="button"
-        onClick={toggle}
-        aria-expanded={expanded}
-        aria-label={t(expanded ? 'medications.collapseLabel' : 'medications.expandLabel')}
-        className="flex min-w-0 flex-1 items-center gap-3 p-4 text-left"
-      >
-        <span className="text-lg font-bold text-content">{dose.time}</span>
-        <div className="min-w-0 flex-1">
-          <p className={cn('text-base font-bold text-content', !expanded && 'truncate')}>
-            {dose.name}
-            {dose.dosage && <span className="font-normal text-content-variant"> · {dose.dosage}</span>}
-          </p>
-          {taken ? (
-            <p className={cn('text-sm text-secondary', !expanded && 'truncate')}>
-              {t('medications.takenBy', {
-                name: dose.takenByName ?? '',
-                time: dose.takenAt ? formatTime(dose.takenAt, current) : '',
-              })}
+      <div className="flex min-w-0 flex-1 flex-col gap-3 p-4">
+        <button
+          type="button"
+          onClick={toggle}
+          aria-expanded={expanded}
+          aria-label={t(expanded ? 'medications.collapseLabel' : 'medications.expandLabel')}
+          className="flex min-w-0 items-start gap-3 text-left"
+        >
+          <span className="shrink-0 pt-0.5 text-lg font-bold text-content">{dose.time}</span>
+          <div className="min-w-0 flex-1">
+            <p className="break-words text-base font-bold text-content">
+              {dose.name}
+              {dose.dosage && <span className="font-normal text-content-variant"> · {dose.dosage}</span>}
             </p>
+            {taken ? (
+              <p className="break-words text-sm text-secondary">
+                {t('medications.takenBy', {
+                  name: dose.takenByName ?? '',
+                  time: dose.takenAt ? formatTime(dose.takenAt, current) : '',
+                })}
+              </p>
+            ) : (
+              <>
+                {dose.instructions && (
+                  <p className={cn('break-words text-sm text-content-variant', !expanded && 'line-clamp-1')}>
+                    {dose.instructions}
+                  </p>
+                )}
+                {caregiverName && (
+                  <p className={cn('break-words text-sm text-content-variant', !expanded && 'line-clamp-1')}>
+                    {t('medications.responsibleCaregiver', { name: caregiverName })}
+                  </p>
+                )}
+              </>
+            )}
+          </div>
+          <Icon
+            name="chevronRight"
+            size={20}
+            className={cn(
+              'mt-0.5 shrink-0 text-content-variant transition-transform',
+              expanded ? '-rotate-90' : 'rotate-90',
+            )}
+          />
+        </button>
+        <div className="flex items-center gap-2">
+          {taken ? (
+            <Button variant="outline" size="md" onClick={() => onUndo(dose)} disabled={busy}>
+              {t('medications.undo')}
+            </Button>
           ) : (
-            <>
-              {dose.instructions && (
-                <p className={cn('text-sm text-content-variant', !expanded && 'truncate')}>
-                  {dose.instructions}
-                </p>
-              )}
-              {caregiverName && (
-                <p className={cn('text-sm text-content-variant', !expanded && 'truncate')}>
-                  {t('medications.responsibleCaregiver', { name: caregiverName })}
-                </p>
-              )}
-            </>
+            <Button
+              size="md"
+              onClick={() => onMarkTaken(dose)}
+              disabled={busy}
+              leadingIcon={<Icon name="check" size={20} />}
+            >
+              {t('medications.markTaken')}
+            </Button>
+          )}
+          {onDelete && (
+            <IconButton
+              label={t('medications.deleteLabel')}
+              icon="trash"
+              iconSize={20}
+              className="ml-auto text-content-variant hover:text-sos"
+              onClick={() => onDelete(dose)}
+              disabled={busy}
+            />
           )}
         </div>
-        <Icon
-          name="chevronRight"
-          size={20}
-          className={cn(
-            'shrink-0 text-content-variant transition-transform',
-            expanded ? '-rotate-90' : 'rotate-90',
-          )}
-        />
-      </button>
-      <div className="flex shrink-0 items-center gap-1 py-4 pr-4">
-        {taken ? (
-          <Button variant="outline" size="md" onClick={() => onUndo(dose)} disabled={busy}>
-            {t('medications.undo')}
-          </Button>
-        ) : (
-          <Button
-            size="md"
-            onClick={() => onMarkTaken(dose)}
-            disabled={busy}
-            leadingIcon={<Icon name="check" size={20} />}
-          >
-            {t('medications.markTaken')}
-          </Button>
-        )}
-        {onDelete && (
-          <IconButton
-            label={t('medications.deleteLabel')}
-            icon="trash"
-            iconSize={20}
-            className="text-content-variant hover:text-sos"
-            onClick={() => onDelete(dose)}
-            disabled={busy}
-          />
-        )}
       </div>
     </div>
   )
