@@ -72,10 +72,10 @@ export function SettleUpModal({ debt, onClose, onConfirm }: SettleUpModalProps) 
           {(id) => <TextField id={id} value={note} onChange={(e) => setNote(e.target.value)} />}
         </FormField>
         <div className="flex flex-col gap-3 pt-2">
-          <Button type="submit" fullWidth disabled={!canSave}>
+          <Button type="submit" fullWidth disabled={!canSave} loading={saving}>
             {t('costs.confirmSettle')}
           </Button>
-          <Button type="button" variant="ghost" fullWidth onClick={onClose}>
+          <Button type="button" variant="ghost" fullWidth onClick={onClose} disabled={saving}>
             {t('common.cancel')}
           </Button>
         </div>

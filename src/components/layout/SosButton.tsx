@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, Icon, Modal, Spinner } from '@/components/ui'
+import { Button, Icon, Modal } from '@/components/ui'
 import { useDisclosure } from '@/hooks/useDisclosure'
 import { useSupabaseClient } from '@/hooks/useSupabaseClient'
 import { useCareCircle } from '@/features/care-circle'
@@ -55,8 +55,8 @@ export function SosButton() {
         title={t('sos.title')}
         footer={
           <>
-            <Button variant="danger" size="lg" fullWidth onClick={handleConfirm} disabled={sending}>
-              {sending ? <Spinner size={22} className="border-sos-on/40 border-t-sos-on" /> : t('sos.confirm')}
+            <Button variant="danger" size="lg" fullWidth onClick={handleConfirm} loading={sending}>
+              {t('sos.confirm')}
             </Button>
             <Button variant="ghost" fullWidth onClick={close} disabled={sending}>
               {t('sos.cancel')}

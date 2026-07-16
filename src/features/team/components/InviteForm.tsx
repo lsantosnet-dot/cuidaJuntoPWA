@@ -98,10 +98,10 @@ export function InviteForm({ isOpen, onClose, onSubmit }: InviteFormProps) {
             )}
           </FormField>
           <div className="flex flex-col gap-3 pt-2">
-            <Button type="submit" fullWidth disabled={!canSave}>
+            <Button type="submit" fullWidth disabled={!canSave} loading={saving}>
               {t('team.sendInvite')}
             </Button>
-            <Button type="button" variant="ghost" fullWidth onClick={close}>
+            <Button type="button" variant="ghost" fullWidth onClick={close} disabled={saving}>
               {t('common.cancel')}
             </Button>
           </div>

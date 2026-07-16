@@ -52,14 +52,14 @@ export function RoutineItemCard({ progress, onMarkDone, onUndo, onDelete, busy }
 
       {target === 1 ? (
         complete ? (
-          <Button variant="outline" size="md" onClick={() => onUndo(progress)} disabled={busy}>
+          <Button variant="outline" size="md" onClick={() => onUndo(progress)} loading={busy}>
             {t('routine.undo')}
           </Button>
         ) : (
           <Button
             size="md"
             onClick={() => onMarkDone(progress)}
-            disabled={busy}
+            loading={busy}
             leadingIcon={<Icon name="check" size={20} />}
           >
             {t('routine.markDone')}

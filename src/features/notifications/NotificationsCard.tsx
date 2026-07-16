@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Button, Icon, Spinner } from '@/components/ui'
+import { Button, Icon } from '@/components/ui'
 import { usePushNotifications } from './usePushNotifications'
 
 /** Settings section to enable/disable Web Push for this device. */
@@ -35,16 +35,16 @@ export function NotificationsCard() {
       </p>
       {push.error && <p className="text-base text-danger">{push.error}</p>}
       {push.subscribed ? (
-        <Button variant="outline" onClick={() => void push.unsubscribe()} disabled={push.busy}>
-          {push.busy ? <Spinner size={20} /> : t('notifications.disable')}
+        <Button variant="outline" onClick={() => void push.unsubscribe()} loading={push.busy}>
+          {t('notifications.disable')}
         </Button>
       ) : (
         <Button
           onClick={() => void push.subscribe()}
-          disabled={push.busy}
+          loading={push.busy}
           leadingIcon={<Icon name="info" size={20} />}
         >
-          {push.busy ? <Spinner size={20} className="border-primary-on/40 border-t-primary-on" /> : t('notifications.enable')}
+          {t('notifications.enable')}
         </Button>
       )}
     </div>

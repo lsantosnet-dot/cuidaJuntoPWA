@@ -91,12 +91,8 @@ export function JoinScreen() {
             <span className="font-bold">{preview.circleName}</span>
           </p>
           <Chip tone="teal">{t(`team.role.${preview.role}`)}</Chip>
-          <Button size="lg" fullWidth onClick={accept} disabled={status === 'accepting'}>
-            {status === 'accepting' ? (
-              <Spinner size={22} className="border-primary-on/40 border-t-primary-on" />
-            ) : (
-              t('join.accept')
-            )}
+          <Button size="lg" fullWidth onClick={accept} loading={status === 'accepting'}>
+            {t('join.accept')}
           </Button>
         </>
       )}

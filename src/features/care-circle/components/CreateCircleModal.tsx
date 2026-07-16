@@ -49,10 +49,10 @@ export function CreateCircleModal({ isOpen, onClose }: CreateCircleModalProps) {
           )}
         </FormField>
         <div className="flex flex-col gap-3 pt-2">
-          <Button type="submit" fullWidth disabled={!canSave}>
+          <Button type="submit" fullWidth disabled={!canSave} loading={saving}>
             {t('onboarding.create')}
           </Button>
-          <Button type="button" variant="ghost" fullWidth onClick={onClose}>
+          <Button type="button" variant="ghost" fullWidth onClick={onClose} disabled={saving}>
             {t('common.cancel')}
           </Button>
         </div>
