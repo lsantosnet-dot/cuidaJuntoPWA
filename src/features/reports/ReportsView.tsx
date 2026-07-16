@@ -43,7 +43,7 @@ export function ReportsView() {
             <Button
               className="mt-4"
               onClick={() => void handleGenerate()}
-              disabled={generating}
+              loading={generating}
               leadingIcon={<Icon name="fileText" size={20} />}
             >
               {generating ? t('reports.doctorReport.generating') : t('reports.doctorReport.action')}

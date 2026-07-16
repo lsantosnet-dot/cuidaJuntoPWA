@@ -63,7 +63,8 @@ function CurrentShift({
               variant="ghost"
               className="bg-primary-on/15 text-primary-on hover:bg-primary-on/25"
               onClick={onAssume}
-              disabled={busy}
+              loading={busy}
+              spinnerClassName="border-primary-on/30 border-t-primary-on"
             >
               {t('shifts.takeOver')}
             </Button>
@@ -84,7 +85,8 @@ function CurrentShift({
             variant="ghost"
             className="bg-primary-on/15 text-primary-on hover:bg-primary-on/25"
             onClick={onAssume}
-            disabled={busy}
+            loading={busy}
+            spinnerClassName="border-primary-on/30 border-t-primary-on"
           >
             {t('shifts.assume')}
           </Button>

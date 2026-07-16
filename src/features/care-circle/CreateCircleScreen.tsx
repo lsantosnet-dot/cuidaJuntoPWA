@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, FormField, TextField, Spinner } from '@/components/ui'
+import { Button, FormField, TextField } from '@/components/ui'
 import { UserMenu } from '@/features/auth'
 import { useCareCircle } from './CareCircleContext'
 
@@ -54,8 +54,8 @@ export function CreateCircleScreen() {
 
         {error && <p className="text-base text-danger">{error}</p>}
 
-        <Button type="submit" size="lg" fullWidth disabled={!canSave}>
-          {saving ? <Spinner size={22} className="border-primary-on/40 border-t-primary-on" /> : t('onboarding.create')}
+        <Button type="submit" size="lg" fullWidth disabled={!canSave} loading={saving}>
+          {t('onboarding.create')}
         </Button>
       </form>
 

@@ -1,6 +1,5 @@
 import { Button } from './Button'
 import { Modal } from './Modal'
-import { Spinner } from './Spinner'
 
 interface ConfirmDialogProps {
   isOpen: boolean
@@ -35,8 +34,8 @@ export function ConfirmDialog({
       title={title}
       footer={
         <>
-          <Button variant="danger" size="lg" fullWidth onClick={onConfirm} disabled={busy}>
-            {busy ? <Spinner size={22} className="border-sos-on/40 border-t-sos-on" /> : confirmLabel}
+          <Button variant="danger" size="lg" fullWidth onClick={onConfirm} loading={busy}>
+            {confirmLabel}
           </Button>
           <Button variant="ghost" fullWidth onClick={onClose} disabled={busy}>
             {cancelLabel}

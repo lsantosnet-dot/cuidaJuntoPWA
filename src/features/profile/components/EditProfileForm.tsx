@@ -62,10 +62,10 @@ export function EditProfileForm({ isOpen, onClose, recipient, onSubmit }: EditPr
           {(id) => <TextArea id={id} value={notes} onChange={(e) => setNotes(e.target.value)} />}
         </FormField>
         <div className="flex flex-col gap-3 pt-2">
-          <Button type="submit" fullWidth disabled={!canSave}>
+          <Button type="submit" fullWidth disabled={!canSave} loading={saving}>
             {t('common.save')}
           </Button>
-          <Button type="button" variant="ghost" fullWidth onClick={onClose}>
+          <Button type="button" variant="ghost" fullWidth onClick={onClose} disabled={saving}>
             {t('common.cancel')}
           </Button>
         </div>

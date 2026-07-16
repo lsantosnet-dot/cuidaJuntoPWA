@@ -74,7 +74,7 @@ export function RecordCard({
             icon="download"
             iconSize={20}
             className="shrink-0 text-content-variant hover:text-primary"
-            disabled={downloading}
+            loading={downloading}
             onClick={() => void handleDownload()}
           />
         )}

@@ -42,7 +42,7 @@ export function ShiftCard({
         <div className="flex flex-col items-end gap-2">
           <Chip tone={STATUS_TONE[shift.status]}>{t(`shifts.status.${shift.status}`)}</Chip>
           {shift.status === 'active' && (
-            <Button variant="ghost" size="md" onClick={() => onEnd(shift.id)} disabled={busy}>
+            <Button variant="ghost" size="md" onClick={() => onEnd(shift.id)} loading={busy}>
               {t('shifts.end')}
             </Button>
           )}

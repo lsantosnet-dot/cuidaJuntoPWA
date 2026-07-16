@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Card, Avatar, Button, Icon } from '@/components/ui'
@@ -19,6 +20,16 @@ export function DashboardView() {
   const { activeShift } = useShifts()
   const { progress, markDone, undoLast } = useRoutine()
   const { entries } = useDiary()
+  const [busyKey, setBusyKey] = useState<string | null>(null)
+
+  const runOn = async (key: string, action: () => Promise<void>) => {
+    setBusyKey(key)
+    try {
+      await action()
+    } finally {
+      setBusyKey(null)
+    }
+  }
 
   const pendingDoses = doses.filter((d) => d.status === 'pending')
   const nextDose = pendingDoses[0]
@@ -70,7 +81,13 @@ export function DashboardView() {
             </Link>
           </div>
           {nextDose ? (
-            <DoseCard dose={nextDose} onMarkTaken={markTaken} onUndo={undo} isUpcoming={!doseOverdue} />
+            <DoseCard
+              dose={nextDose}
+              busy={busyKey === nextDose.key}
+              onMarkTaken={(d) => void runOn(d.key, () => markTaken(d))}
+              onUndo={(d) => void runOn(d.key, () => undo(d))}
+              isUpcoming={!doseOverdue}
+            />
           ) : (
             <Card elevated={false}>
               <p className="text-base text-content-variant">{t('dashboard.allDosesDone')}</p>
@@ -86,7 +103,12 @@ export function DashboardView() {
             </Link>
           </div>
           {nextRoutine ? (
-            <RoutineItemCard progress={nextRoutine} onMarkDone={markDone} onUndo={undoLast} />
+            <RoutineItemCard
+              progress={nextRoutine}
+              busy={busyKey === nextRoutine.item.id}
+              onMarkDone={(p) => void runOn(p.item.id, () => markDone(p))}
+              onUndo={(p) => void runOn(p.item.id, () => undoLast(p))}
+            />
           ) : (
             <Card elevated={false}>
               <p className="text-base text-content-variant">{t('dashboard.allRoutineDone')}</p>

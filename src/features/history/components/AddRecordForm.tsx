@@ -116,10 +116,10 @@ export function AddRecordForm({ isOpen, onClose, onSubmit }: AddRecordFormProps)
         )}
         {attachmentError && <p className="text-sm text-sos">{attachmentError}</p>}
         <div className="flex flex-col gap-3 pt-2">
-          <Button type="submit" fullWidth disabled={!canSave}>
+          <Button type="submit" fullWidth disabled={!canSave} loading={saving}>
             {t('common.save')}
           </Button>
-          <Button type="button" variant="ghost" fullWidth onClick={onClose}>
+          <Button type="button" variant="ghost" fullWidth onClick={onClose} disabled={saving}>
             {t('common.cancel')}
           </Button>
         </div>

@@ -13,8 +13,18 @@ export function TeamView() {
   const form = useDisclosure()
   const [pendingDelete, setPendingDelete] = useState<MembershipRow | null>(null)
   const [deleting, setDeleting] = useState(false)
+  const [revokingId, setRevokingId] = useState<string | null>(null)
 
   const isAdmin = members.some((m) => m.user_id === currentUserId && m.role === 'admin')
+
+  const handleRevoke = async (id: string) => {
+    setRevokingId(id)
+    try {
+      await revoke(id)
+    } finally {
+      setRevokingId(null)
+    }
+  }
 
   const confirmDelete = async () => {
     if (!pendingDelete) return
@@ -82,7 +92,12 @@ export function TeamView() {
                             {t('team.pending')} · {t(`team.role.${i.role}`)}
                           </p>
                         </div>
-                        <Button variant="ghost" size="md" onClick={() => void revoke(i.id)}>
+                        <Button
+                          variant="ghost"
+                          size="md"
+                          onClick={() => void handleRevoke(i.id)}
+                          loading={revokingId === i.id}
+                        >
                           {t('team.revoke')}
                         </Button>
                       </div>

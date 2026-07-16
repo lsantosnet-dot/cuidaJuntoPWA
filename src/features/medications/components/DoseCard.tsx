@@ -87,14 +87,14 @@ export function DoseCard({
         </button>
         <div className="flex items-center gap-2">
           {taken ? (
-            <Button variant="outline" size="md" onClick={() => onUndo(dose)} disabled={busy}>
+            <Button variant="outline" size="md" onClick={() => onUndo(dose)} loading={busy}>
               {t('medications.undo')}
             </Button>
           ) : (
             <Button
               size="md"
               onClick={() => onMarkTaken(dose)}
-              disabled={busy}
+              loading={busy}
               leadingIcon={<Icon name="check" size={20} />}
             >
               {t('medications.markTaken')}
